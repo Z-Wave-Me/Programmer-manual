@@ -243,7 +243,6 @@ th, td {
   padding: 5px;
 }
 
-/* WirenBoard */
 .wikitable {
     background-color: #f8f9fa;
     color: #202122;
@@ -266,4 +265,21 @@ th, td {
     font-weight:bold
 }
 
-/*# sourceMappingURL=style.css.map */
+.borderless {
+    border: 0px;
+    border-collapse:collapse;
+}
+
+.borderless > tr > th, .borderless > tr > td, .borderless > * > tr > th, .borderless > * > tr > td {
+    border: 0px;
+    padding:0.2em 0.4em;
+}
+
+.borderless > tr > th, .borderless > * > tr > th {
+    background-color: #eaecf0;
+    text-align:center
+}
+
+.borderless > caption {
+    font-weight:bold
+}
