@@ -1,0 +1,968 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Z-Wave.Me Programmer for Z-Wave and Zigbee chips</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="js/index.js" defer></script>
+      <link rel="stylesheet" href="css/style.css">
+   </head>
+   <body>
+      <aside class="side-menu open">
+         <nav>
+            <div class="side-menu-header">
+               <div class="close" onclick="toggleMenu()"></div>
+            </div>
+            <div>
+               <img src="pics/Z-Wave-Me.png" alt="Z-Wave.Me">
+            </div>
+            <h3>Z-Wave.Me Programmer Manual</h3>
+            <ul class="ChildLinks">
+               <li><a href="#Revision">Document revision</a></li>
+               <li><a href="#ProductDescription">Product description</a></li>
+               <li><a href="#Package">Package</a></li>
+               <li><a href="#Connecting">Connecting</a></li>
+               <li><a href="#COMPorts">COM-ports</a></li>
+               <li><a href="#StatusLED">Status LED</a></li>
+               <li><a href="#Button">Programming button</a></li>
+               <li><a href="#SofwareInstallation">Software installation</a></li>
+               <li><a href="#Usage">Usage</a>
+                  <ul>
+                     <li><a href="#Slots">Listing slots</a></li>
+                     <li><a href="#Update">Update the programmer</a></li>
+                     <li><a href="#UpdateSE">Update the programmer secure engine</a></li>
+                     <li><a href="#UpdateAdd">TBD</a></li>
+                     <li><a href="#License">Load license</a></li>
+                     <li><a href="#LoadImage">Load image</a></li>
+                     <li><a href="#Push">New slot</a></li>
+                     <li><a href="#FactoryReset">Factory reset</a></li>
+                     <li><a href="#App">Production flash firmware</a></li>
+                     <li><a href="#Token">Token load</a></li>
+                     <li><a href="#Flash">Flash binary</a></li>
+                     <li><a href="#FlashRead">Flash memory read</a></li>
+                     <li><a href="#"></a></li>
+                     <li><a href="#"></a></li>
+                     <li><a href="#MassErase">Mass erase</a></li>
+                     <li><a href="#IsLocked">Checks if locked</a></li>
+                     <li><a href="#Lock">Lock</a></li>
+                     <li><a href="#Unlock">Unlock</a></li>
+                     <li><a href="#UARTSAPI">UART Serial API speed</a></li>
+                     <li><a href="#UARTSWD">UART SWD speed</a></li>
+                     <li><a href="#SWD">SWD speed</a></li>
+                     <li><a href="#RTCGet">Get RTC</a></li>
+                     <li><a href="#RTCSet">Set RTC</a></li>
+                     <li><a href="#LogGet">Logs read</a></li>
+                     <li><a href="#LogReset">Logs reset</a></li>
+                     <li><a href="#RadioTest">Radio test</a></li>
+                     <li><a href="#TDB">TBD</a></li>
+                     <li><a href="#TDB">TDB</a></li>
+                     <li><a href="#PTISet">PTI mode set</a></li>
+                     <li><a href="#PTIGet">PTI mode get</a></li>
+                  </ul>
+               </li>
+               <li><a href="#Usecases">Usecases</a>
+                  <ul>
+                     <li><a href="#UsecaseFlash">Flash a binary file</a></li>
+                     <li><a href="#UsecaseProductionFlash">Prepare to poduction</a></li>
+                     <li><a href="#UsecaseProductionFlash">Production flash</a></li>
+                     <li><a href="#UsecaseProductionAutoFlash">Production flash by button</a></li>
+                     <li><a href="#UsecaseLicense">Load a licence</a></li>
+                     <li><a href="#UsecaseRadioTest">Radio tests</a></li>
+                  </ul>
+               </li>
+               <li><a href="#Update">Upgrade the programmer firmware</a></li>
+               <li><a href="#TechnicalSpecifications">Technical specifications</a></li>
+               <li><a href="#Requirements">Requirements</a>
+               <li><a href="#Troubleshooting">Troubleshooting</a></li>
+               <li><a href="#Channels">Channels and modulation</a></li>
+            </ul>
+         </nav>
+      </aside>
+      
+      <header>
+         <div class="wrapper">
+
+            <div class="content">
+               <div class="menu">
+                  <div class="hide-when-open hamburger" onclick="toggleMenu()"><div></div></div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <div class="wrapper wrapper-helper">
+         <div class="content">
+            <h1 id="Revision">Document revision</h1>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Date</p></th>
+                     <th><p>Author</p></th>
+                     <th><p>Changes</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>2023.06.20</p></td>
+                     <td><p>Poltorak Serguei</p></td>
+                     <td><p>Initial version</p></td>
+                  </tr>
+                  <tr>
+                     <td><p></p></td>
+                     <td><p></p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h1 id="ProductDescription">Product description</h1>
+            <p>Z-Wave.Me Programmer is a full featured programming tool for development, testing, production and production testing of IoT devices based on Z-Wave, Zigbee, Thread and BLE protocols.</b>
+            <center><img src="pics/Programmer-side.png" width="30%"></center>
+            <p>Z-Wave.Me Programmer is able to flash Z-Wave and Zigbee chips by Silicon Labs such as:</p>
+            <ul>
+               <li>ZGM130S</li>
+               <li>ZGM230S</li>
+               <li>EFR32ZG23</li>
+               <li>EFR32MG21</li>
+               <li>MGM210</li>
+            </ul>
+            
+            <h1 id="Package">Package</h1>
+            <p>The Z-Wave.Me Programmer package inclides:</p>
+            <ul>
+               <li>Z-Wave.Me Programmer</li>
+               <li>2.4 GHz RP-SMA male antenna</li>
+               <li>868 MHz RP-SMA male antenna (for EU)</li>
+               <li>916 MHz RP-SMA male antenna (for US)</li>
+               <li>CR2032 coin-cell battery</li>
+               <li>Programming cable with IDC-10 female connector</li>
+               <li>USB-A to USB-C cable</li>
+            </ul>
+            
+            <h1 id="Connecting">Connecting</h1>
+            <p>The front panel of the programmer has one programming port an with IDC-10 male 10-pins (2x5) connector with pitch 2.54 mm.</p>
+            <p>The programming cable connector on the other side should be adjusted to your device depending on the programming pads on the PCB. The programmer port is also compatible with the Tag Connect TC2050-IDC cable.</p>
+            <p>❗ It is important to keep the programming cable length as short as possible. The SWD protocol used to program chips runs on a very high speed.<p>
+            TBD:<center><img src="pics/Programmer-port-description.png" width="30%"></center>
+            <p>On the top panel there is a status LED and a programming button</p>
+            <center><img src="pics/Programmer-front-annotations.png" width="30%"></center>
+            <p>The back panel has the USB-C port. This port is used to power the programmer (in autonomous mode) and to flash and upload fimwares in the programmer when connected to a PC.</p>
+            <p>In addition the programmer has two RP-SMA female connectors for 868 MHz (for Z-Wave) and 2.4 GHz antennas (for Zigbee, Thread and BLE). Those antennas are used for production test and as an RF sniffer.</p>
+            <center><img src="pics/Programmer-back-annotations.png" width="30%"></center>
+
+            <h1 id="COMPorts">COM-ports</h1>
+            <p>When connected thru USB the programmer provides 4 COM-ports (appears as ttyUSB0-4 on Linux). Ports of the programmer:</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Port</p></th>
+                     <th><p>Description</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>ttyUSB0</p></td>
+                     <td><p>Z-Wave controller</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>ttyUSB1</p></td>
+                     <td><p>Z-Wave sniffer (PTI)</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>ttyUSB2</p></td>
+                     <td><p>Programming interface and Zigbee controller</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>ttyUSB3</p></td>
+                     <td><p>Zigbee sniffer (PTI)</p></td>
+                  </tr>
+               </tbody>
+            </table>
+            
+            <h1 id="StatusLED">Status LED</h1>
+            <p>The status LED shows the programmer current status and operation progress</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>LED status</p></th>
+                     <th><p>Description</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>Blinking green</p></td>
+                     <td><p>TBD</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>Blinking red</p></td>
+                     <td><p>TBD</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>TBD</p></td>
+                     <td><p>TBD</p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h1 id="Button">Programming button</h1>
+            <p>The programming button can be used to start flashin in <a href="#UsecaseProductionAutoFlash">autonomous mode</a>.</p>
+            
+            <h1 id="SofwareInstallation">Software installation</h1>
+            <p>TBD</p>
+            
+            <h1 id="Usage">Usage</h1>
+            <p>The programmer software has multiple functions.</p>
+            <p>Get the list of available commands:<br><code>zme_prog7 -h</code></p>
+            <p>Get specific parameters for each command:<br><code>zme_prog7 &lt;command&gt; -h</code></p>
+            <p>Common options for all commands:</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-d</p></td>
+                     <td><p>Device file (Unix) or COM-port (Windows)</p></td>
+                     <td><p>/dev/ttyUSB2<br/>COM3</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-b</p></td>
+                     <td><p>Baude rate</p></td>
+                     <td><p>9600-921600</p></td>
+                     <td><p>230400</p></td>
+                  </tr>
+                  <tr>
+                     <td>-chip<p></p></td>
+                     <td><p>Chip connected to the programmer</p></td>
+                     <td><p>ZGM130S, EFR32MG21, ZGM130S037HGN1, EFR32MG21A020F1024IM32, MGM210PA32JIA, ZGM230SA27HGN, ZGM230SB27HGN</p></td>
+                     <td><p>ZGM130S</p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id="Slots">Listing slots</h3>
+            <p>List occupied slots and free memory of the programmer:<br><code>zme_prog7 slots -d DEVICE [-b BAUDRATE]</code></p>
+            
+            <h3 id="Update">Update the programmer</h3>
+            <p>Update the programmer firmware using a file in .pkzme format:<br><code>zme_prog7 update -d DEVICE [-b BAUDRATE] filename</code></p>
+                        
+            <h3 id="UpdateSE">Update the programmer secure engine</h3>
+            <p>Update the programmer secure engine firmware using a file in .pkzme format:<br><code>zme_prog7 update_se -d DEVICE [-b BAUDRATE] filename</code></p>
+            
+            <h3 id="UpdateAdd">TBD</h3>
+            <p>Update the programmer firmware using a file in .pkzme format:<br><code>zme_prog7 update_add -d DEVICE [-b BAUDRATE] filename</code></p>
+                        
+            <h3 id="License">Load license</h3>
+            <p>Load a license string in the programmer:<br><code>zme_prog7 lic -d DEVICE [-b BAUDRATE] license</code></p>
+                        
+            <h3 id="LoadImage">Load image</h3>
+            <p>Load a file in .pkzme format in a specific slot:<br><code>zme_prog7 loadImage -d DEVICE [-b BAUDRATE] [-i SLOT_INDEX] filename</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-i</p></td>
+                     <td><p>Slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p>New slot is created</p></td>
+                  </tr>
+               </tbody>
+            </table>
+            
+            <h3 id="Push">New slot</h3>
+            <p>Create a new slot of a specific size:<br><code>zme_prog7 push -d DEVICE [-b BAUDRATE] -s SIZE</code></p>
+            <p>In most cases this is not needed as <code>loadImage</code> command will create a new slot with the required size. Use this command if you develop and want to allocate a slot to reload the re-compiles image keeping the same slot index.</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-s</p></td>
+                     <td><p>Slot size in bytes</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+            
+            <h3 id="FactoryReset">Factory reset</h3>
+            <p>Erase all slots and factory reset the programmer:<br><code>zme_prog7 reset -d DEVICE [-b BAUDRATE]</code></p>
+                        
+            <h3 id="App">Production flash firmware</h3>
+            <p>Flash the connected device using slots:<br><code>zme_prog7 app -d DEVICE [-b BAUDRATE] [-fi FIRMWARE_INDEX] [-bi BOOTLOADER_INDEX] [-ki KEY_INDEX] [-bri BOOTLOADER_RAM_INDEX] [-l LOCK] [-chip CHIP] [-rule {APP,PROGBOARD}] [-sei SEI_INDEX] [-o {DSK}] [-u USER_DATA]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-fi</p></td>
+                     <td><p>Firmware slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-bi</p></td>
+                     <td><p>Bootloader slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>bri</p></td>
+                     <td><p>Bootloader RAM slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-sei</p></td>
+                     <td><p>Secure Engine slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-ki</p></td>
+                     <td><p>Key slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-l</p></td>
+                     <td><p>Lock the chip after flashing</p></td>
+                     <td><p>0 or 1</p></td>
+                     <td><p>1</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-rule</p></td>
+                     <td><p>TBD</p></td>
+                     <td><p></p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-o</p></td>
+                     <td><p>DSK for Z-Wave devices</p></td>
+                     <td><p>TBD format</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-u</p></td>
+                     <td><p>Defines special user data as a hex-encoded string</p></td>
+                     <td><p>TBD</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id="Token">Token load</h3>
+            <p>Load the token TBD:<br><code>zme_prog7 token [-token_encrypt TOKEN_ENCRYPT] [-token_sign TOKEN_SIGN] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-token_encrypt</p></td>
+                     <td><p>Path to the encrypt.key file</p></td>
+                     <td><p></p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-token_sign</p></td>
+                     <td><p>Path to the sign.key-tokens.txt file</p></td>
+                     <td><p></p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id="Flash">Flash binary</h3>
+            <p>Flash a binary file in .bin or .hex format into the connected device:<br><code>zme_prog7 flash [-addr ADDRESS] -d DEVICE [-b BAUDRATE] [-chip CHIP] filename</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-addr</p></td>
+                     <td><p>Address to write to in bytes</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+                        
+            <h3 id="FlashRead">Flash memory read</h3>
+            <p>Read the flash memory of the connected device:<br><code>zme_prog7 flash_read [-addr ADDRESS] [-len LENGHT] [-o OUT_FILE] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-addr</p></td>
+                     <td><p>Address to read from in bytes</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-len</p></td>
+                     <td><p>Length of the data to be read in bytes</p></td>
+                     <td><p>1 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-o</p></td>
+                     <td><p>Out file</p></td>
+                     <td><p>Valid file name</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id=""></h3>
+            <p>:<br><code>zme_prog7 flash_write [-addr ADDRESS] [-data DATA] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-addr</p></td>
+                     <td><p>Address to write to in bytes</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-data</p></td>
+                     <td><p>Data to be written as a hex string</p></td>
+                     <td><p>Hex string</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id=""></h3>
+            <p>:<br><code>zme_prog7 pageerase [-addr ADDRESS] [-len LENGHT] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-addr</p></td>
+                     <td><p>Address of the area to be erased</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-len</p></td>
+                     <td><p>Length of the area to be erased</p></td>
+                     <td><p>1 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id="MassErase">Mass erase</h3>
+            <p>Full flash erase in the connected device:<br><code>zme_prog7 masserase -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+
+            <h3 id="IsLocked">Checks if locked</h3>
+            <p>Checks if the connected device is locked:<br><code>zme_prog7 isLocked -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+                        
+            <h3 id="Lock">Lock</h3>
+            <p>Lock the connected device :<br><code>zme_prog7 lock -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+                        
+            <h3 id="Unlock">Unlock</h3>
+            <p>Unlocks the connected device:<br><code>zme_prog7 unlock -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <p>TBD when is it possible?</p>
+                        
+            <h3 id="UARTSAPI">UART Serial API speed</h3>
+            <p>Set the UART Serial API speed:<br><code>zme_prog7 uart_sapi [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
+            <p>TBD when is it needed?</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-n</p></td>
+                     <td><p>New port speed in bits/s</p></td>
+                     <td><p>9600..230400</p></td>
+                     <td><p>230400</p></td>
+                  </tr>
+               </tbody>
+            </table>
+                        
+            <h3 id="UARTSWD">UART SWD speed</h3>
+            <p>Set the UART SWD speed:<br><code>zme_prog7 uart_swd_set [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
+            <p>TBD when is it needed?</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-n</p></td>
+                     <td><p>New port speed in bits/s</p></td>
+                     <td><p>9600..230400</p></td>
+                     <td><p>230400</p></td>
+                  </tr>
+               </tbody>
+            </table>
+                        
+            <h3 id="SWD">SWD speed</h3>
+            <p>Set the SWD speed:<br><code>zme_prog7 swd_set [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
+            <p>TBD when is it needed?</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-n</p></td>
+                     <td><p>New port speed in bits/s</p></td>
+                     <td><p>9600..230400</p></td>
+                     <td><p>230400</p></td>
+                  </tr>
+               </tbody>
+            </table>
+                        
+            <h3 id="RTCGet">Get RTC</h3>
+            <p>Get time from the programmer:<br><code>zme_prog7 rtc_get -d DEVICE [-b BAUDRATE]</code></p>
+            <p>To preserve the time without power, the battery should be inserted.</p>
+                        
+            <h3 id="RTCSet">Set RTC</h3>
+            <p>Set time in the programmer to system time:<br><code>zme_prog7 rtc_set -d DEVICE [-b BAUDRATE]</code></p>
+            <p>This command should be used on each power on if the programmer have no battery inserted. To preserve the time without power, the battery should be inserted.</p>
+                        
+            <h3 id="LogGet">Logs read</h3>
+            <p>Read logs from the programmer:<br><code>zme_prog7 log_get -d DEVICE [-b BAUDRATE]</code></p>
+                        
+            <h3 id="LogReset">Logs reset</h3>
+            <p>Reset the log in the programmer:<br><code>zme_prog7 log_reset -d DEVICE [-b BAUDRATE]</code></p>
+                        
+            <h3 id="RadioTest">Radio test</h3>
+            <p>Start radio test on the connected device:<br><code>zme_prog7 radiotest [-d DEVICE] [-b BAUDRATE] [-m MODE] [-fr MODULATION] [-c CHANNEL] [-p POWER] [-t TIMEOUT]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-m</p></td>
+                     <td><p>Transmission mode</p></td>
+                     <td>
+                        <table>
+                           <tr><td>CARRIER</td><td>Emit carrier only</td></tr>
+                           <tr><td>PN9</td><td>Send a polynomium x^9 + x^5 + 1</td></tr>
+                           <tr><td>B10</td><td>Send 10101010.... sequence</td></tr>
+                           <tr><td>PKG</td><td>Send a packet with random content and the chip UUID at the end</td></tr>
+                           <tr><td>MODEM</p></td><td>TBD</td></tr>
+                        </table>
+                     </td>
+                     <td><p>PKG</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-fr</p></td>
+                     <td><p>Modulation type</p></td>
+                     <td>
+                        <table>
+                           <tr><td>ZIGBEE</td><td>TBD</td></tr>
+                           <tr><td>2P4GHZ_ANTDIV_COEX</td><td>TBD</td></tr>
+                           <tr><td>2P4GHZ_COEX</td><td>TBD</td></tr>
+                           <tr><td>2P4GHZ_ANTDIV</td><td>TBD</td></tr>
+                           <tr><td>2P4GHZ</td><td>802.15.04 (Zigbee, Matter, Thread)</td></tr>
+                           <tr><td>BLE_CODED_125KBPS</td><td>BLE 125 kbps channel (GFSK)</td></tr>
+                           <tr><td>BLE_CODED_500KBPS</td><td>BLE 500 kbps channel (GFSK)</td></tr>
+                           <tr><td>BLE_1MBPS</td><td>BLE 1 Mbps channel (8-DPSK)</td></tr>
+                           <tr><td>BLE_2MBPS</td><td>BLE 2 Mbps channel (DQPSK)</td></tr>
+                        </table>
+                     </td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-c</p></td>
+                     <td><p>Channel number</p></td>
+                     <td><p><a href="#Channels">see the table</a></p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-p</p></td>
+                     <td><p>TX power</p></td>
+                     <td><p>0 .. 200 (0-20 dBm)</p></td>
+                     <td><p>100 (10 dBm)</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-t</p></td>
+                     <td><p>Turn off the test N milliseconds</p></td>
+                     <td><p>1 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <table>
+                           ,,
+                        </table>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <p>See <a href="#UsecaseRadioTest">examples below</a><p>
+
+            <h3 id="TDB">TBD</h3>
+            <p>TDB:<br><code>zme_prog7 auto_flash_get -d DEVICE [-b BAUDRATE]</code></p>
+                        
+            <h3 id="TDB">TDB</h3>
+            <p>TDB:<br><code>zme_prog7 auto_flash_set -d DEVICE [-b BAUDRATE] [-i INDEX] -fi FIRMWARE_INDEX -bi BOOTLOADER_INDEX -ki KEY_INDEX -bri BOOTLOADER_RAM_INDEX [-l LOCK] [-chip CHIP] [-rule {APP,PROGBOARD}] [-sei SEI_INDEX] [-u USER_DATA]</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-fi</p></td>
+                     <td><p>Firmware slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-bi</p></td>
+                     <td><p>Bootloader slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>bri</p></td>
+                     <td><p>Bootloader RAM slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-sei</p></td>
+                     <td><p>Secure Engine slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-ki</p></td>
+                     <td><p>Key slot index</p></td>
+                     <td><p>0 ...</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-l</p></td>
+                     <td><p>Lock the chip after flashing</p></td>
+                     <td><p>0 or 1</p></td>
+                     <td><p>1</p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-rule</p></td>
+                     <td><p>TBD</p></td>
+                     <td><p></p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-o</p></td>
+                     <td><p>DSK for Z-Wave devices</p></td>
+                     <td><p>TBD format</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-u</p></td>
+                     <td><p>Defines special user data as a hex-encoded string</p></td>
+                     <td><p>TBD</p></td>
+                     <td><p></p></td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h3 id="PTISet">PTI mode set</h3>
+            <p>Set the PTI mode and speed on the programmer PTI (TBD - which? Z-Wave or Zigbee?):<br><code>zme_prog7 pti_set [-m MODE] [-pti_baud PTI_BAUD] [-b BAUDRATE] -d DEVICE</code></p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default (if not specified)</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-m</p></td>
+                     <td><p>PTI mode</p></td>
+                     <td><p>TBD</p></td>
+                     <td><p></p></td>
+                  </tr>
+                  <tr>
+                     <td><p>-pti_baud</p></td>
+                     <td><p>PTI interface baude rate</p></td>
+                     <td><p>460800 ... 921600</p></td>
+                     <td><p>460800</p></td>
+                  </tr>
+               </tbody>
+            </table>
+                        
+            <h3 id="PTIGet">PTI mode get</h3>
+            <p>Get the PTI mode and speed on the programmer PTI (TBD - which? Z-Wave or Zigbee?):<br><code>zme_prog7 pti_get [-b BAUDRATE] -d DEVICE</code></p>
+
+            <h1 id="Usecases">Usecases</h1>
+            <p>This programmer is a very powerful tool. Below you can find the typical use cases.</p>
+            
+            <h3 id="UsecaseFlash">Flash a binary file</h3>
+            <p>When developing, one typically want to flash the Secure Engine firmware (should be done once), the bootloader and the firmware. Here is an example:</p>
+            <code><pre>
+zme_prog7 flash s2c1_se_firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
+zme_prog7 masserase -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
+zme_prog7 ota_key.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
+zme_prog7 flash bootloader.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
+zme_prog7 flash firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
+            </pre></code>
+            <p>Secure Engine bootloader is typically taked from <a href="https://github.com/SiliconLabs/gecko_sdk/tree/gsdk_4.3/util/se_release/public">SiLabs git</a>. If the connected device is based on a chip that does not have a Secure Engine, skip the step with loading Secure Engine firmware.</p>
+            <p>The bootloader and the firmware are compiled using the Simplicity Studio.</p>
+
+
+            <h3 id="UsecaseProductionFlash">Prepare to poduction</h3>
+            <p>You can load files in the programmer, set the flash counter with <a href="#UsecaseLicense">the license</a> and send it to the factory for production.</p>
+            <p>.pkzme files are encrypted and can be safely sent over the internet.</p>
+            <p>Data in slots can not be extracted back from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
+            <code><pre>
+zme_prog7 reset -d /dev/ttyUSB2
+zme_prog7 loadImage BootloaderRam.pkzme -d /dev/ttyUSB2
+zme_prog7 loadImage Bootloader.pkzme -d /dev/ttyUSB2
+zme_prog7 loadImage Firmware.zwaveme.pkzme -d /dev/ttyUSB2
+zme_prog7 loadImage s2c1_se_firmware.zwaveme.pkzme -d /dev/ttyUSB2
+zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2
+            </pre></code>
+            <p>On the factory use <a href="#UsecaseProductionFlash">app</a> command to flash each device.</p>
+            <p>Alternatively you can enable the <a href="#UsecaseProductionAutoFlash">production flash by button press</a> mode to work autonomously without even connecting the programmer to a PC.</p>
+            
+            <h3 id="UsecaseProductionFlash">Production flash</h3>
+            <p>The factory will use the following command to flash each device.</p>
+            <code><pre>
+zme_prog7 app -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -rule APP -d /dev/ttyUSB2
+            </pre></code>
+            
+            <h3 id="UsecaseProductionAutoFlash">Production flash by button</h3>
+            <p>The programmer can be turned in the autonomous programming mode with flashing initiated by button press. In this case there is no need to connect the programmer to a PC. Just use a USB power supply to power the programmer.</p>
+            <code><pre>
+TBD: zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -rule APP -d /dev/ttyUSB2
+            </pre></code>
+
+            <h3 id="UsecaseLicense">Load a licence</h3>
+            <p>The license sets the number of allowed flash operations (flash counter). This ensures the factory can't produce more devices you ordered. Always have 10% extra count for rework on the factory side.</p>
+            <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
+            <code>zme_prog7 lic TBD(example string) -d /dev/ttyUSB2</code>
+
+            <h3 id="UsecaseRadioTest">Radio tests</h3>
+            <p>Production or FCC/CE certification tests examples:</p>
+            <p>Z-Wave on EU 868.42 MHz 9.6 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on EU 868.42 MHz 40 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on EU 869.85 MHz 100 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on US 868.42 MHz 9.6 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on US 908.42 MHz 40 kpbs:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on US 916.00 MHz 100 kpbs:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on US LR 912 Mz 100 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            <p>Z-Wave on US LR 920 Mz 100 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+            
+            <p>Zigbee on 2405 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 11 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code>
+            <p>Zigbee on 2440 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 18 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code></p>
+            <p>Zigbee on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 26 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code></p>
+            
+            <p>BLE 2 Mbps on 2402 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 0 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+            <p>BBLE 2 Mbps on 2440 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 19 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+            <p>BLE 2 Mbps on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 39 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+
+            <h1 id="Update">Upgrade the programmer firmware</h1>
+            <p>TBD</p>
+            <code><pre></pre></code>
+
+            <h1 id="TechnicalSpecifications">Technical specifications</h1>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <td>Voltage</td>
+                     <td>5 V USB-C</td>
+                  </tr>
+                  <tr>
+                     <td>Max current</td>
+                     <td>TBD</td>
+                  </tr>
+                  <tr>
+                     <td>Operating temperature</td>
+                     <td>5°C … +50°C</td>
+                  </tr>
+                  <tr>
+                     <td>Operating humidity</td>
+                     <td>Up to 90%, without condensation of moisture</td>
+                  </tr>
+                  <tr>
+                     <td>Dimensions</td>
+                     <td>90x50x25 mm</td>
+                  </tr>
+                  <tr>
+                     <td>Weight</td>
+                     <td>50 g</td>
+                  </tr>
+                  <tr>
+                     <td>Communication interfaces</td>
+                     <td>
+                        <p>USB (4 virtual serial ports)</p></td>
+                        <p>Z-Wave (wireless)</p>
+                        <p>Zigbee/Thread/802.15.4/BLE (wireless)</p>
+                        <p>SWD</p>
+                  </tr>
+                  <tr>
+                     <td>Z-Wave frequency</td>
+                     <td>
+                        <p>865...869 MHz: Europe (EU), India (IN), Russia (RU), China (CN), South Africa (EU), Middle East (EU)</p> 
+                        <p>908...920 MHz: America, excluding Brazil and Peru (US), Israel (IL)</p> 
+                        <p>919...921 MHz: Australia / New Zealand / Brazil / Peru (ANZ), Hong Kong (HK), Japan (JP), Taiwan (TW), Korea (KR)</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Zigbee/Thread frequency</td>
+                     <td>
+                        <p>2405...2480 MHz</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>BLE frequency</td>
+                     <td>
+                        <p>2402...2480 MHz</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+
+            <h1 id="Troubleshooting">Troubleshooting</h1>
+            <table class="wikitable">
+               <tbody>
+                  <tr><td><b>Problem</b></td><td>Programming fails immediately of a while after starting</td></tr>
+                  <tr><td><b>Cause</b></td><td>The programming cable is too long</td></tr>
+                  <tr><td><b>Solution</b></td><td>Reduce the cable length or slow down the programming speed using <code>swd_set -new</code></td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><td><b>Problem</b></td><td>The software tool can't communicate with the programmer</td></tr>
+                  <tr><td><b>Cause</b></td><td>Bad cable or wrong port selected</td></tr>
+                  <tr><td><b>Solution</b></td><td>Check the USB cable. Use the 3rd port out of 4 ports (/dev/ttyUSB2 on Linux)</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><td><b>Problem</b></td><td>The clock is not correct in the programmer after power cycle</td></tr>
+                  <tr><td><b>Cause</b></td><td>The battery is not installed in the programmer</td></tr>
+                  <tr><td><b>Solution</b></td><td>Insert the coin-cell CR2032 battery</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><td><b>Problem</b></td><td>No RF emission in radio test mode</td></tr>
+                  <tr><td><b>Cause</b></td><td>Wrong channel is selected</td></tr>
+                  <tr><td><b>Solution</b></td><td>Make sure to select the correct Z-Wave, Zigbee or BLE channel</td></tr>
+                  <tr><td colspan="2">&nbsp;</td></tr>
+                  <tr><td><b>Problem</b></td><td></td></tr>
+                  <tr><td><b>Cause</b></td><td></td></tr>
+                  <tr><td><b>Solution</b></td><td></td></tr>
+               </tbody>
+            </table>
+
+            <h1 id="Requirements">Requirements</h1>
+            <p>Software requirements: TBD</p>
+            
+            <h1 id="Channels">Channels and modulation</h1>
+            <h3>Z-Wave</h3>
+            <table class="wikitable">
+               <tbody>
+                  <tr><td>Region</td><td>Channel</td><td>Frequency, MHz</td><td>Modulation</td><td>Channel bandwidth, kHz</td></tr>
+                  <tr><td>TBD</td><td></td><td></td><td></td><td></td></tr>
+               </tbody>
+            </table>
+            
+            <h3>802.15.4 PHY (Zigbee, Thread, Matter)</h3>
+            <p>Zigbee channels are numbered from 11 to 26.</p>
+            <p>Modulation is OQPSK.</p>
+            <p>Channel bandwidth is 250 kbps.</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr><td>Channel</td><td>Frequency, MHz</td><td>Channel</td><td>Frequency, MHz</td></tr>
+                  <tr><td>11</td><td>2405</td><td>19</td><td>2445</td></tr>
+                  <tr><td>12</td><td>2410</td><td>20</td><td>2450</td></tr>
+                  <tr><td>13</td><td>2415</td><td>21</td><td>2455</td></tr>
+                  <tr><td>14</td><td>2420</td><td>22</td><td>2460</td></tr>
+                  <tr><td>15</td><td>2425</td><td>23</td><td>2465</td></tr>
+                  <tr><td>16</td><td>2430</td><td>24</td><td>2470</td></tr>
+                  <tr><td>17</td><td>2435</td><td>25</td><td>2475</td></tr>
+                  <tr><td>18</td><td>2440</td><td>26</td><td>2480</td></tr>
+               </tbody>
+            </table>
+
+            <h3>Bluetooth Low Energy</h3>
+            <p>Bluetooth Low Energy channels are numbered from 0 to 39. Channels 37, 38, and 39 are Advertizing channels.</p>
+            <p>Modulation depends on the bandwidth:
+               <ul>
+                  <li>GFSK on 125 kbps and 500 kbps</li>
+                  <li>DQPSK on 2 Mbps</li>
+                  <li>8-DPSK on 1 Mbps</li>
+               </ul>
+            </p>
+            <p>The tool uses RF channels 0..39 that corresponds to frequencies 2402..2480 MHz. See the table below for the mapping between the RF channel and the BLE Data/Advertising channel index.</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr><td>RF Channel</td><td>BLE Channel</td><td>Frequency, MHz</td><td>RF Channel</td><td>BLE Channel</td><td>Frequency, MHz</td></tr>
+                  <tr><td>0</td><td>37 (advertising)</td><td>2402</td><td>20</td><td>18</td><td>2442</td></tr>
+                  <tr><td>1</td><td>0</td><td>2404</td><td>21</td><td>19</td><td>2444</td></tr>
+                  <tr><td>2</td><td>1</td><td>2406</td><td>22</td><td>20</td><td>2446</td></tr>
+                  <tr><td>3</td><td>2</td><td>2408</td><td>23</td><td>21</td><td>2448</td></tr>
+                  <tr><td>4</td><td>3</td><td>2410</td><td>24</td><td>22</td><td>2450</td></tr>
+                  <tr><td>5</td><td>4</td><td>2412</td><td>25</td><td>23</td><td>2452</td></tr>
+                  <tr><td>6</td><td>5</td><td>2414</td><td>26</td><td>24</td><td>2454</td></tr>
+                  <tr><td>7</td><td>6</td><td>2416</td><td>27</td><td>25</td><td>2456</td></tr>
+                  <tr><td>8</td><td>7</td><td>2418</td><td>28</td><td>26</td><td>2458</td></tr>
+                  <tr><td>9</td><td>8</td><td>2420</td><td>29</td><td>27</td><td>2460</td></tr>
+                  <tr><td>10</td><td>9</td><td>2422</td><td>30</td><td>28</td><td>2462</td></tr>
+                  <tr><td>11</td><td>10</td><td>2424</td><td>31</td><td>29</td><td>2464</td></tr>
+                  <tr><td>12</td><td>38 (advertising)</td><td>2426</td><td>32</td><td>30</td><td>2466</td></tr>
+                  <tr><td>13</td><td>11</td><td>2428</td><td>33</td><td>31</td><td>2468</td></tr>
+                  <tr><td>14</td><td>12</td><td>2430</td><td>34</td><td>32</td><td>2470</td></tr>
+                  <tr><td>15</td><td>13</td><td>2432</td><td>35</td><td>33</td><td>2472</td></tr>
+                  <tr><td>16</td><td>14</td><td>2434</td><td>36</td><td>34</td><td>2474</td></tr>
+                  <tr><td>17</td><td>15</td><td>2436</td><td>37</td><td>35</td><td>2476</td></tr>
+                  <tr><td>18</td><td>16</td><td>2438</td><td>38</td><td>36</td><td>2478</td></tr>
+                  <tr><td>19</td><td>17</td><td>2440</td><td>39</td><td>39 (advertising)</td><td>2480</td></tr>
+               </tbody>
+            </table>
+
+         </div>
+      </div>
+   </body>
+</html>
