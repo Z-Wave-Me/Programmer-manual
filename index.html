@@ -38,9 +38,9 @@
                      <li><a href="#App">Production flash firmware</a></li>
                      <li><a href="#Token">Token load</a></li>
                      <li><a href="#Flash">Flash binary</a></li>
-                     <li><a href="#FlashRead">Flash memory read</a></li>
-                     <li><a href="#"></a></li>
-                     <li><a href="#"></a></li>
+                     <li><a href="#FlashRead">Flash read</a></li>
+                     <li><a href="#FlashWrite">Flash wite</a></li>
+                     <li><a href="#PageErase"></a>Page Erase</li>
                      <li><a href="#MassErase">Mass erase</a></li>
                      <li><a href="#IsLocked">Checks if locked</a></li>
                      <li><a href="#Lock">Lock</a></li>
@@ -384,7 +384,7 @@
                </tbody>
             </table>
                         
-            <h3 id="FlashRead">Flash memory read</h3>
+            <h3 id="FlashRead">Flash read</h3>
             <p>Read the flash memory of the connected device:<br><code>zme_prog7 flash_read [-addr ADDRESS] [-len LENGHT] [-o OUT_FILE] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
             <table class="wikitable">
                <tbody>
@@ -415,8 +415,8 @@
                </tbody>
             </table>
 
-            <h3 id=""></h3>
-            <p>:<br><code>zme_prog7 flash_write [-addr ADDRESS] [-data DATA] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <h3 id="FlaseWrite">Flash write</h3>
+            <p>Write to the flash memory of the connected device:<br><code>zme_prog7 flash_write [-addr ADDRESS] [-data DATA] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -440,8 +440,8 @@
                </tbody>
             </table>
 
-            <h3 id=""></h3>
-            <p>:<br><code>zme_prog7 pageerase [-addr ADDRESS] [-len LENGHT] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <h3 id="PageErase">Page erase</h3>
+            <p>Erase the flash memory page in the connected device:<br><code>zme_prog7 pageerase [-addr ADDRESS] [-len LENGHT] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
             <table class="wikitable">
                <tbody>
                   <tr>
