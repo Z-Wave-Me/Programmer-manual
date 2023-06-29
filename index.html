@@ -30,7 +30,7 @@
                      <li><a href="#Slots">Listing slots</a></li>
                      <li><a href="#Update">Update the programmer</a></li>
                      <li><a href="#UpdateSE">Update the programmer secure engine</a></li>
-                     <li><a href="#UpdateAdd">TBD</a></li>
+                     <li><a href="#UpdateBootloader">Update the programmer bootloader</a></li>
                      <li><a href="#License">Load license</a></li>
                      <li><a href="#LoadImage">Load image</a></li>
                      <li><a href="#Push">New slot</a></li>
@@ -164,34 +164,29 @@
                      <th><p>Description</p></th>
                   </tr>
                   <tr>
-                     <td><p>Blinking green</p></td>
-                     <td><p><font color="green">●</font>○<font color="green">●</font>○</p></td>
-                     <td><p>TBD</p></td>
-                  </tr>
-                  <tr>
                      <td><p>Stady green</p></td>
                      <td><p><font color="green">●●●●</font></p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>Ready</p></td>
                   </tr>
                   <tr>
                      <td><p>Blinking red</p></td>
                      <td><p><font color="red">●</font>○<font color="red">●</font>○</p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>Error flashing</p></td>
                   </tr>
                   <tr>
                      <td><p>Stady red</p></td>
                      <td><p><font color="red">●●●●</font></p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>Error flashing</p></td>
                   </tr>
                   <tr>
-                     <td><p>TBD</p></td>
-                     <td><p><font color="yellow">●</font>○<font color="yellow">●</font>○</p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>Yellow blinking</p></td>
+                     <td><p><font color="orange">●</font>○<font color="orange">●</font>○</p></td>
+                     <td><p>Flahing in progress</p></td>
                   </tr>
                   <tr>
                      <td><p>Off</p></td>
                      <td><p>○○○○</p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>Programmer is not powered</p></td>
                   </tr>
                </tbody>
             </table>
@@ -256,8 +251,8 @@
             <h3 id="UpdateSE">Update the programmer secure engine</h3>
             <p>Update the programmer secure engine firmware using a file in .pkzme format:<br><code>zme_prog7 update_se -d DEVICE [-b BAUDRATE] filename</code></p>
             
-            <h3 id="UpdateAdd">TBD</h3>
-            <p>Update the programmer firmware using a file in .pkzme format:<br><code>zme_prog7 update_add -d DEVICE [-b BAUDRATE] filename</code></p>
+            <h3 id="UpdateBootloader">Update the programmer bootloader</h3>
+            <p>Update the programmer bootloader using a file in .pkzme format:<br><code>zme_prog7 update_bootloader -d DEVICE [-b BAUDRATE] filename</code></p>
                         
             <h3 id="License">Load license</h3>
             <p>Load a license string in the programmer:<br><code>zme_prog7 lic -d DEVICE [-b BAUDRATE] license</code></p>
@@ -305,7 +300,7 @@
             <p>Erase all slots and factory reset the programmer:<br><code>zme_prog7 reset -d DEVICE [-b BAUDRATE]</code></p>
                         
             <h3 id="App">Production flash firmware</h3>
-            <p>Flash the connected device using slots:<br><code>zme_prog7 app -d DEVICE [-b BAUDRATE] [-fi FIRMWARE_INDEX] [-bi BOOTLOADER_INDEX] [-ki KEY_INDEX] [-bri BOOTLOADER_RAM_INDEX] [-l LOCK] [-chip CHIP] [-rule {APP,PROGBOARD}] [-sei SEI_INDEX] [-o {DSK}] [-u USER_DATA]</code></p>
+            <p>Flash the connected device using slots:<br><code>zme_prog7 app -d DEVICE [-b BAUDRATE] [-fi FIRMWARE_INDEX] [-bi BOOTLOADER_INDEX] [-ki KEY_INDEX] [-bri BOOTLOADER_RAM_INDEX] [-chip CHIP] [-sei SEI_INDEX] [-o {DSK}] [-u USER_DATA]</code></p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -345,34 +340,33 @@
                      <td><p></p></td>
                   </tr>
                   <tr>
-                     <td><p>-l</p></td>
-                     <td><p>Lock the chip after flashing</p></td>
-                     <td><p>0 or 1</p></td>
-                     <td><p>1</p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-rule</p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>-o DSK</p></td>
+                     <td><p>Let the programmer to generate the Z-Wave DSK for the device (requires support in the firmware flashed)</p></td>
                      <td><p></p></td>
                      <td><p></p></td>
                   </tr>
                   <tr>
-                     <td><p>-o</p></td>
-                     <td><p>DSK for Z-Wave devices</p></td>
-                     <td><p>TBD format</p></td>
+                     <td><p>-o NO_LOCK</p></td>
+                     <td><p>Don't lock the chip after flashing. Works only if the firmare was loaded in the programmer unencrypted</p></td>
+                     <td><p></p></td>
                      <td><p></p></td>
                   </tr>
                   <tr>
                      <td><p>-u</p></td>
-                     <td><p>Defines special user data as a hex-encoded string</p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>Defines special user data as a hex-encoded string (requires support in the firmware flashed). This date is written and can be accessed from inside the firmware in flash address 0x0FE00000 (size is 0x800 bytes for ZGM130/EFR32ZG13 and 0x400 bytes for ZGM230/EFR32ZG23/EFR32MG21/MGM21)</p></td>
+                     <td><p></p></td>
                      <td><p></p></td>
                   </tr>
                </tbody>
             </table>
 
-            <h3 id="Token">Token load</h3>
-            <p>Load the token TBD:<br><code>zme_prog7 token [-token_encrypt TOKEN_ENCRYPT] [-token_sign TOKEN_SIGN] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <h3 id="OTAKey">OTA Key load</h3>
+            <p>Load the OTA upgrade key in the connected device:<br><code>zme_prog7 loadOTAKey [-token_encrypt TOKEN_ENCRYPT] [-token_sign TOKEN_SIGN] -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
+            <p>OTA keys are generated using the Silicon Labs Simplicity Studio:</p>
+            <code><pre>
+commander.exe gbl keygen --type keygen --type aes-ccm -o encrypt.key
+commander.exe gbl keygen --type ecc-p256 --outfile sign.key</p>
+            </pre></code>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -389,7 +383,7 @@
                   </tr>
                   <tr>
                      <td><p>-token_sign</p></td>
-                     <td><p>Path to the sign.key-tokens.txt file</p></td>
+                     <td><p>Path to the sign.key file</p></td>
                      <td><p></p></td>
                      <td><p></p></td>
                   </tr>
@@ -507,11 +501,11 @@
                         
             <h3 id="Unlock">Unlock</h3>
             <p>Unlocks the connected device:<br><code>zme_prog7 unlock -d DEVICE [-b BAUDRATE] [-chip CHIP]</code></p>
-            <p>TBD when is it possible?</p>
+            <p>The flash content is fully erased during this operation (in some chips bootloader and Secure Engine content is not erased)</p>
                         
             <h3 id="UARTSAPI">UART Serial API speed</h3>
             <p>Set the UART Serial API speed:<br><code>zme_prog7 uart_sapi [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
-            <p>TBD when is it needed?</p>
+            <p>Set the speed of communications with the programmer. Higher speed requires good USB cable.</p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -523,27 +517,7 @@
                   <tr>
                      <td><p>-n</p></td>
                      <td><p>New port speed in bits/s</p></td>
-                     <td><p>9600..230400</p></td>
-                     <td><p>230400</p></td>
-                  </tr>
-               </tbody>
-            </table>
-                        
-            <h3 id="UARTSWD">UART SWD speed</h3>
-            <p>Set the UART SWD speed:<br><code>zme_prog7 uart_swd_set [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
-            <p>TBD when is it needed?</p>
-            <table class="wikitable">
-               <tbody>
-                  <tr>
-                     <th><p>Option</p></th>
-                     <th><p>Description</p></th>
-                     <th><p>Values</p></th>
-                     <th><p>Default</p></th>
-                  </tr>
-                  <tr>
-                     <td><p>-n</p></td>
-                     <td><p>New port speed in bits/s</p></td>
-                     <td><p>9600..230400</p></td>
+                     <td><p>9600..921600</p></td>
                      <td><p>230400</p></td>
                   </tr>
                </tbody>
@@ -551,7 +525,7 @@
                         
             <h3 id="SWD">SWD speed</h3>
             <p>Set the SWD speed:<br><code>zme_prog7 swd_set [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
-            <p>TBD when is it needed?</p>
+            <p>This speed is used to flash via SWD the special UART boot firmware (provided by the programmer). Once flashed, the programmer will switch to this UART to load the target firmware to the device. Higher speed requires short cable.</p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -563,12 +537,32 @@
                   <tr>
                      <td><p>-n</p></td>
                      <td><p>New port speed in bits/s</p></td>
-                     <td><p>9600..230400</p></td>
-                     <td><p>230400</p></td>
+                     <td><p>1024000..19000000</p></td>
+                     <td><p>1024000</p></td>
                   </tr>
                </tbody>
             </table>
                         
+            <h3 id="UARTSWD">UART SWD speed</h3>
+            <p>Set the UART SWD speed:<br><code>zme_prog7 uart_swd_set [-new NEW] [-b BAUDRATE] -d DEVICE</code></p>
+            <p>This speed is used to flash via UART the target firmware special. This step comes after flashing the special UART firmware (provided by the programmer). Higher speed requires short cable.</p>
+            <table class="wikitable">
+               <tbody>
+                  <tr>
+                     <th><p>Option</p></th>
+                     <th><p>Description</p></th>
+                     <th><p>Values</p></th>
+                     <th><p>Default</p></th>
+                  </tr>
+                  <tr>
+                     <td><p>-n</p></td>
+                     <td><p>New port speed in bits/s</p></td>
+                     <td><p>960000..2500000</p></td>
+                     <td><p>960000</p></td>
+                  </tr>
+               </tbody>
+            </table>
+            
             <h3 id="RTCGet">Get RTC</h3>
             <p>Get time from the programmer:<br><code>zme_prog7 rtc_get -d DEVICE [-b BAUDRATE]</code></p>
             <p>To preserve the time without power, the battery should be inserted.</p>
@@ -584,7 +578,7 @@
             <p>Reset the log in the programmer:<br><code>zme_prog7 log_reset -d DEVICE [-b BAUDRATE]</code></p>
                         
             <h3 id="RadioTest">Radio test</h3>
-            <p>Start radio test on the connected device:<br><code>zme_prog7 radiotest [-d DEVICE] [-b BAUDRATE] [-m MODE] [-fr MODULATION] [-c CHANNEL] [-p POWER] [-t TIMEOUT]</code></p>
+            <p>Start radio test on the programmer:<br><code>zme_prog7 radiotest [-d DEVICE] [-b BAUDRATE] [-m MODE] [-fr MODULATION] [-c CHANNEL] [-p POWER] [-t TIMEOUT]</code></p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -602,7 +596,7 @@
                            <tr><td>PN9</td><td>Send a polynomium x^9 + x^5 + 1</td></tr>
                            <tr><td>B10</td><td>Send 10101010.... sequence</td></tr>
                            <tr><td>PKG</td><td>Send a packet with random content and the chip UUID at the end</td></tr>
-                           <tr><td>MODEM</td><td>TBD</td></tr>
+                           <tr><td>MODEM</td><td>Send and receive commands in Modem mode (see A.R.T. tool https://z-wave.me/manual/zniffer/)</td></tr>
                         </table>
                      </td>
                      <td><p>PKG</p></td>
@@ -612,7 +606,7 @@
                      <td><p>Modulation type</p></td>
                      <td>
                         <table class="borderless">
-                           <tr><td>ZIGBEE</td><td>TBD</td></tr>
+                           <tr><td>ZIGBEE</td><td>IEEE 802.15.4</td></tr>
                            <tr><td>2P4GHZ_ANTDIV_COEX</td><td>TBD</td></tr>
                            <tr><td>2P4GHZ_COEX</td><td>TBD</td></tr>
                            <tr><td>2P4GHZ_ANTDIV</td><td>TBD</td></tr>
@@ -730,7 +724,7 @@
                   <tr>
                      <td><p>-m</p></td>
                      <td><p>PTI mode</p></td>
-                     <td><p>TBD</p></td>
+                     <td><p>0 for off or 1 for on</p></td>
                      <td><p></p></td>
                   </tr>
                   <tr>
@@ -779,19 +773,19 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2
             <h3 id="UsecaseProductionFlash">Production flash</h3>
             <p>The factory will use the following command to flash each device.</p>
             <code><pre>
-zme_prog7 app -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -rule APP -d /dev/ttyUSB2
+zme_prog7 app -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
             </pre></code>
             
             <h3 id="UsecaseProductionAutoFlash">Production flash by button</h3>
             <p>The programmer can be turned in the autonomous programming mode with flashing initiated by button press. In this case there is no need to connect the programmer to a PC. Just use a USB power supply to power the programmer.</p>
             <code><pre>
-TBD: zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -rule APP -d /dev/ttyUSB2
+TBD: zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
             </pre></code>
 
             <h3 id="UsecaseLicense">Load a licence</h3>
             <p>The license sets the number of allowed flash operations (flash counter). This ensures the factory can't produce more devices you ordered. Always have 10% extra count for rework on the factory side.</p>
             <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
-            <code>zme_prog7 lic TBD(example string) -d /dev/ttyUSB2</code>
+            <code>zme_prog7 lic EB6BEEAC1A07D48BA24FF0AC6...C7 -d /dev/ttyUSB2</code>
 
             <h3 id="UsecaseRadioTest">Radio tests</h3>
             <p>Production or FCC/CE certification tests examples:</p>
@@ -813,8 +807,14 @@ TBD: zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024I
             <p>BLE 2 Mbps on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 39 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
 
             <h1 id="Update">Upgrade the programmer firmware</h1>
-            <p>TBD</p>
-            <code><pre></pre></code>
+            <p>Upgrade to the latest programmer firmware:</p>
+            <code><pre>zme_prog7 update -d /dev/ttyUSB2 Programmer_EFR32MG21.programmer.pkzme</pre></code>
+            <p>Somtimes you might need to update the Secure Engine and the bootloader too:</p>
+            <code><pre>
+zme_prog7 update_bootloader -d /dev/ttyUSB2 Programmer_EFR32MG21_bootloader.programmer.pkzme
+zme_prog7 update_se -d /dev/ttyUSB2 Programmer_EFR32MG21_SE.programmer.pkzme
+zme_prog7 update -d /dev/ttyUSB2 Programmer_EFR32MG21.programmer.pkzme
+            </pre></code>
 
             <h1 id="TechnicalSpecifications">Technical specifications</h1>
             <table class="wikitable">
