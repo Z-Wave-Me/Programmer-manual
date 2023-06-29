@@ -40,7 +40,7 @@
                      <li><a href="#Flash">Flash binary</a></li>
                      <li><a href="#FlashRead">Flash read</a></li>
                      <li><a href="#FlashWrite">Flash wite</a></li>
-                     <li><a href="#PageErase"></a>Page Erase</li>
+                     <li><a href="#PageErase">Page Erase</a></li>
                      <li><a href="#MassErase">Mass erase</a></li>
                      <li><a href="#IsLocked">Checks if locked</a></li>
                      <li><a href="#Lock">Lock</a></li>
@@ -62,7 +62,7 @@
                <li><a href="#Usecases">Use cases</a>
                   <ul>
                      <li><a href="#UsecaseFlash">Flash a binary file</a></li>
-                     <li><a href="#UsecaseProductionFlash">Prepare to poduction</a></li>
+                     <li><a href="#UsecaseProductionFlash">Prepare to production</a></li>
                      <li><a href="#UsecaseProductionFlash">Production flash</a></li>
                      <li><a href="#UsecaseProductionAutoFlash">Production flash by button</a></li>
                      <li><a href="#UsecaseLicense">Load a licence</a></li>
@@ -747,7 +747,7 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</p>
             <code><pre>
 zme_prog7 flash s2c1_se_firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
 zme_prog7 masserase -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
-zme_prog7 ota_key.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
+zme_prog7 loadOTAKey -token_encrypt ota_encrypt.key -token_sign ota_sign.key -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
 zme_prog7 flash bootloader.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
 zme_prog7 flash firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
             </pre></code>
@@ -755,7 +755,7 @@ zme_prog7 flash firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
             <p>The bootloader and the firmware are compiled using the Simplicity Studio.</p>
 
 
-            <h3 id="UsecaseProductionFlash">Prepare to poduction</h3>
+            <h3 id="UsecaseProductionFlash">Prepare to production</h3>
             <p>You can load files in the programmer, set the flash counter with <a href="#UsecaseLicense">the license</a> and send it to the factory for production.</p>
             <p>.pkzme files are encrypted and can be safely sent over the internet.</p>
             <p>Data in slots can not be extracted back from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
