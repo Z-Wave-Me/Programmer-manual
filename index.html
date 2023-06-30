@@ -53,9 +53,11 @@
                      <li><a href="#RTCSet">Set RTC</a></li>
                      <li><a href="#LogGet">Logs read</a></li>
                      <li><a href="#LogReset">Logs reset</a></li>
+                     <!--
                      <li><a href="#RadioTest">Radio test</a></li>
                      <li><a href="#TDB">TBD</a></li>
                      <li><a href="#TDB">TDB</a></li>
+                     -->
                      <li><a href="#PTISet">PTI mode set</a></li>
                      <li><a href="#PTIGet">PTI mode get</a></li>
                   </ul>
@@ -67,15 +69,19 @@
                      <li><a href="#UsecaseProductionFlash">Production flash</a></li>
                      <li><a href="#UsecaseProductionAutoFlash">Production flash by button</a></li>
                      <li><a href="#UsecaseLicense">Load a licence</a></li>
+                     <!--
                      <li><a href="#UsecaseRadioTest">Radio tests</a></li>
+                     -->
                   </ul>
                </li>
-               <li><a href="#Update">Upgrade the programmer firmware</a></li>
+               <li><a href="#ProgrammerUpdate">Upgrade the programmer firmware</a></li>
                <li><a href="#TechnicalSpecifications">Technical specifications</a></li>
                <li><a href="#Requirements">Requirements</a>
                <li><a href="#Troubleshooting">Troubleshooting</a></li>
                <li><a href="#Revision">Document revision</a></li>
+               <!--
                <li><a href="#Channels">Channels and modulation</a></li>
+               -->
             </ul>
          </nav>
       </aside>
@@ -578,6 +584,7 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
             <h3 id="LogReset">Logs reset</h3>
             <p>Reset the log in the programmer:<br><code>zme_prog7 log_reset -d DEVICE [-b BAUDRATE]</code></p>
                         
+            <!--
             <h3 id="RadioTest">Radio test</h3>
             <p>Start radio test on the programmer:<br><code>zme_prog7 radiotest [-d DEVICE] [-b BAUDRATE] [-m MODE] [-fr MODULATION] [-c CHANNEL] [-p POWER] [-t TIMEOUT]</code></p>
             <table class="wikitable">
@@ -711,6 +718,7 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
                   </tr>
                </tbody>
             </table>
+            -->
 
             <h3 id="PTISet">PTI mode set</h3>
             <p>Set the PTI mode and speed on the programmer PTI (TBD - which? Z-Wave or Zigbee?):<br><code>zme_prog7 pti_set [-m MODE] [-pti_baud PTI_BAUD] [-b BAUDRATE] -d DEVICE</code></p>
@@ -780,6 +788,7 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
             <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
             <code>zme_prog7 lic EB6BEEAC1A07D48BA24FF0AC6...C7 -d /dev/ttyUSB2</code>
 
+            <!--
             <h3 id="UsecaseRadioTest">Radio tests</h3>
             <p>Production or FCC/CE certification tests examples:</p>
             <p>Z-Wave on EU 868.42 MHz 9.6 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
@@ -798,8 +807,9 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
             <p>BLE 2 Mbps on 2402 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 0 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
             <p>BBLE 2 Mbps on 2440 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 19 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
             <p>BLE 2 Mbps on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 39 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+            -->
 
-            <h1 id="Update">Upgrade the programmer firmware</h1>
+            <h1 id="ProgrammerUpdate">Upgrade the programmer firmware</h1>
             <p>Upgrade to the latest programmer firmware:</p>
             <code><pre>zme_prog7 update -d /dev/ttyUSB2 Programmer_EFR32MG21.programmer.pkzme</pre></code>
             <p>Somtimes you might need to update the Secure Engine and the bootloader too:</p>
@@ -907,6 +917,7 @@ zme_prog7 update -d /dev/ttyUSB2 Programmer_EFR32MG21.programmer.pkzme</pre></co
                </tbody>
             </table>
 
+            <!--
             <h1 id="Channels">Channels and modulation</h1>
             <h3>Z-Wave</h3>
             <table class="wikitable">
@@ -969,7 +980,7 @@ zme_prog7 update -d /dev/ttyUSB2 Programmer_EFR32MG21.programmer.pkzme</pre></co
                   <tr><td>19</td><td>17</td><td>2440</td><td>39</td><td>39 (advertising)</td><td>2480</td></tr>
                </tbody>
             </table>
-
+            -->
          </div>
       </div>
    </body>
