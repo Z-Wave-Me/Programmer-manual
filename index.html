@@ -37,6 +37,7 @@
                      <li><a href="#UpdateSE">Update the programmer secure engine</a></li>
                      <li><a href="#UpdateBootloader">Update the programmer bootloader</a></li>
                      <li><a href="#License">Load license</a></li>
+                     <li><a href="#CountCustom">Change count</a></li>
                      <li><a href="#LoadImage">Load image</a></li>
                      <li><a href="#Push">New slot</a></li>
                      <li><a href="#FactoryReset">Factory reset</a></li>
@@ -305,7 +306,32 @@
                         
             <h3 id="License">Load license</h3>
             <p>Load a license string in the programmer:<br><code>zme_prog7 lic -d DEVICE [-b BAUDRATE] license</code></p>
-                        
+
+            <h3 id="CountCustom">Change count</h3>
+            <p>Set max programming count for custom (non Z-Wave.Me) firmwares:<br><code>zme_prog7 count_custom -d DEVICE [-b BAUDRATE] [-c count_current] [-cm count_max] key</code></p>
+            <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Option</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                      <th><p>Default</p></th>
+                   </tr>
+                   <tr>
+                      <td><p>-c</p></td>
+                      <td><p>Current programming counter</p></td>
+                      <td><p>0 ...</p></td>
+                      <td><p>0</p></td>
+                   </tr>
+                   <tr>
+                    <td><p>-cm</p></td>
+                    <td><p>Max programming counter</p></td>
+                    <td><p>0 ...</p></td>
+                    <td><p></p></td>
+                 </tr>
+                </tbody>
+             </table>
+
             <h3 id="LoadImage">Load image</h3>
             <p>Load a file in .pkzme format in a specific slot:<br><code>zme_prog7 loadImage -d DEVICE [-b BAUDRATE] [-i SLOT_INDEX] filename</code></p>
             <table class="wikitable">
