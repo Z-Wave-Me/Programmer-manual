@@ -49,7 +49,6 @@
                      <li><a href="#UARTSAPI">UART Serial API speed</a></li>
                      <li><a href="#UARTSWD">UART SWD speed</a></li>
                      <li><a href="#SWD">SWD speed</a></li>
-                     <li><a href="#RTCGet">Get RTC</a></li>
                      <li><a href="#RTCSet">Set RTC</a></li>
                      <li><a href="#LogGet">Logs read</a></li>
                      <li><a href="#LogReset">Logs reset</a></li>
@@ -562,10 +561,6 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
                   </tr>
                </tbody>
             </table>
-            
-            <h3 id="RTCGet">Get RTC</h3>
-            <p>Get time from the programmer:<br><code>zme_prog7 rtc_get -d DEVICE [-b BAUDRATE]</code></p>
-            <p>To preserve the time without power, the battery should be inserted.</p>
                         
             <h3 id="RTCSet">Set RTC</h3>
             <p>Set time in the programmer to system time:<br><code>zme_prog7 rtc_set -d DEVICE [-b BAUDRATE]</code></p>
