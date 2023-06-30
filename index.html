@@ -721,7 +721,8 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
             -->
 
             <h3 id="PTISet">PTI mode set</h3>
-            <p>Set the PTI mode and speed on the programmer PTI (TBD - which? Z-Wave or Zigbee?):<br><code>zme_prog7 pti_set [-m MODE] [-pti_baud PTI_BAUD] [-b BAUDRATE] -d DEVICE</code></p>
+            <p>Set the PTI mode and speed on the programmer PTI:<br><code>zme_prog7 pti_set [-m MODE] [-pti_baud PTI_BAUD] [-b BAUDRATE] -d DEVICE</code></p>
+            <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -746,8 +747,9 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
             </table>
                         
             <h3 id="PTIGet">PTI mode get</h3>
-            <p>Get the PTI mode and speed on the programmer PTI (TBD - which? Z-Wave or Zigbee?):<br><code>zme_prog7 pti_get [-b BAUDRATE] -d DEVICE</code></p>
-
+            <p>Get the PTI mode and speed on the programmer PTI:<br><code>zme_prog7 pti_get [-b BAUDRATE] -d DEVICE</code></p>
+            <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p>
+            
             <h1 id="Usecases">Use cases</h1>
             <p>This programmer is a very powerful tool. Below you can find the typical use cases.</p>
             
