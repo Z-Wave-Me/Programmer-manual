@@ -21,6 +21,7 @@
                <li><a href="#ProductDescription">Product description</a></li>
                <li><a href="#Package">Package</a></li>
                <li><a href="#Connecting">Connecting</a></li>
+               <li><a href="#Pinout">Programming port pinout</a></li>
                <li><a href="#COMPorts">COM-ports</a></li>
                <li><a href="#StatusLED">Status LED</a></li>
                <li><a href="#Button">Programming button</a></li>
@@ -122,10 +123,12 @@
             <p>The back panel has the USB-C port. This port is used to power the programmer (in autonomous mode) and to flash and upload fimwares in the programmer when connected to a PC.</p>
             <p>In addition the programmer has two RP-SMA female connectors for 868/916 MHz (for Z-Wave) and 2.4 GHz antennas (for Zigbee, Thread and BLE). Those antennas are used for production test and as an RF sniffer.</p>
             <center><img src="pics/Programmer-back-annotations.png" width="30%"></center>
+            <h1 id="Pinout">Programming port pinout</h1>
             <p>The programming cable connector has IDC-10 female connector on one side. On the other side it should be adjusted to your device depending on the programming pads on the PCB. The programmer port is also compatible with the Tag Connect TC2050-IDC cable.</p>
-            <p>❗ It is important to keep the programming cable length as short as possible. The SWD protocol used to program chips runs on a very high speed.<p>
+            <p>❗ It is important to keep the programming cable length as short as possible. The SWD and SWD/UART protocols used to program chips run on a very high speed.<p>
             <p>Programming port pinout:</p>
-            TBD:<center><img src="pics/Programmer-port-description.png" width="30%"></center>
+            <center><img src="pics/Programmer-port-pinout.svg" width="30%"></center>
+            <p>Chip programming requires only SWDIO, SWCLK, SWO, RESET and GND. If power is not provided to the chip, VCC is also needed.</p>
 
             <h1 id="COMPorts">COM-ports</h1>
             <p>When connected thru USB the programmer provides 4 COM-ports (appears as ttyUSB0-4 on Linux). Ports of the programmer:</p>
