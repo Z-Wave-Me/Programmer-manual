@@ -50,15 +50,15 @@
                      <li><a href="#UARTSWD">UART SWD speed</a></li>
                      <li><a href="#SWD">SWD speed</a></li>
                      <li><a href="#RTCSet">Set RTC</a></li>
-                     <li><a href="#LogGet">Logs read</a></li>
-                     <li><a href="#LogReset">Logs reset</a></li>
+                     <!-- <li><a href="#LogGet">Logs read</a></li> -->
+                     <!-- <li><a href="#LogReset">Logs reset</a></li> -->
                      <!--
                      <li><a href="#RadioTest">Radio test</a></li>
                      <li><a href="#TDB">TBD</a></li>
                      <li><a href="#TDB">TDB</a></li>
                      -->
-                     <li><a href="#PTISet">PTI mode set</a></li>
-                     <li><a href="#PTIGet">PTI mode get</a></li>
+                     <!-- <li><a href="#PTISet">PTI mode set</a></li>
+                     <li><a href="#PTIGet">PTI mode get</a></li> -->
                   </ul>
                </li>
                <li><a href="#Usecases">Use cases</a>
@@ -566,11 +566,11 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
             <p>Set time in the programmer to system time:<br><code>zme_prog7 rtc_set -d DEVICE [-b BAUDRATE]</code></p>
             <p>This command should be used on each power on if the programmer have no battery inserted. To preserve the time without power, the battery should be inserted.</p>
                         
-            <h3 id="LogGet">Logs read</h3>
+            <!-- <h3 id="LogGet">Logs read</h3>
             <p>Read logs from the programmer:<br><code>zme_prog7 log_get -d DEVICE [-b BAUDRATE]</code></p>
                         
             <h3 id="LogReset">Logs reset</h3>
-            <p>Reset the log in the programmer:<br><code>zme_prog7 log_reset -d DEVICE [-b BAUDRATE]</code></p>
+            <p>Reset the log in the programmer:<br><code>zme_prog7 log_reset -d DEVICE [-b BAUDRATE]</code></p> -->
                         
             <!--
             <h3 id="RadioTest">Radio test</h3>
@@ -708,7 +708,7 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
             </table>
             -->
 
-            <h3 id="PTISet">PTI mode set</h3>
+            <!-- <h3 id="PTISet">PTI mode set</h3>
             <p>Set the PTI mode and speed on the programmer PTI:<br><code>zme_prog7 pti_set [-m MODE] [-pti_baud PTI_BAUD] [-b BAUDRATE] -d DEVICE</code></p>
             <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p>
             <table class="wikitable">
@@ -736,7 +736,7 @@ commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
                         
             <h3 id="PTIGet">PTI mode get</h3>
             <p>Get the PTI mode and speed on the programmer PTI:<br><code>zme_prog7 pti_get [-b BAUDRATE] -d DEVICE</code></p>
-            <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p>
+            <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p> -->
             
             <h1 id="Usecases">Use cases</h1>
             <p>This programmer is a very powerful tool. Below you can find the typical use cases.</p>
