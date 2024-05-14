@@ -105,6 +105,7 @@
             <h1 id="ProductDescription">Product description</h1>
             <p>Z-Wave.Me Programmer is a full featured programming tool for development, testing, production and production testing of IoT devices based on Z-Wave, Zigbee, Thread and BLE protocols.</b>
             <center><img src="pics/Programmer-side.png" width="30%"></center>
+            <!-- FIXME -->
             <p>Z-Wave.Me Programmer is able to flash Z-Wave and Zigbee chips by Silicon Labs such as:</p>
             <ul>
                <li>ZGM130S</li>
@@ -138,7 +139,7 @@
             <p>❗ It is important to keep the programming cable length as short as possible. The SWD and SWD/UART protocols used to program chips run on a very high speed.<p>
             <p>Programming port pinout:</p>
             <center><img src="pics/Programmer-port-pinout.svg" width="30%"></center>
-            <p>Chip programming requires only SWDIO, SWCLK, SWO, RESET and GND. If power is not provided to the chip, VCC is also needed.</p>
+            <p>Chip programming requires only SWDIO, SWCLK, RESET and GND. If power is not provided to the chip, VCC is also needed.</p>
 
             <h1 id="COMPorts">COM-ports</h1>
             <p>When connected thru USB the programmer provides 4 COM-ports (appears as ttyUSB0-4 on Linux). Ports of the programmer:</p>
@@ -200,20 +201,21 @@
             </table>
 
             <h1 id="Button">Programming button</h1>
+            <!-- FIXME -->
             <p>The programming button can be used to start flashing in <a href="#UsecaseProductionAutoFlash">autonomous mode</a>.</p>
             
-            <h1 id="SofwareInstallation">Software installation</h1>
+            <h1 id="SofwareInstallation">Z-Wave.Me software installation</h1>
             <ul>
-               <li><a href="https://z-wave.me/download/ZMEProgrammer7/latest/zme_prog7_emg21_linux64.zip">Z-Wave.Me Programmer Tool for Linux 64 bits</a></li>
-               <li><a href="https://z-wave.me/download/ZMEProgrammer7/latest/zme_prog7_emg21_win32.zip">Z-Wave.Me Programmer Tool for Windows</a></li>
-               <li><a href="https://z-wave.me/download/ZMEProgrammer7/latest/zme_prog7_ProgrammerRam.zip">Programer RAM binary (for -bri parameter)</a></li>
+               <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/zme_prog7/00.00.07.00/">Programmer Tool</a></li>
+               <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/zme_prog7/changelog.md">Programmer Tool Changelog</a></li>
+               <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/programmer/changelog.md">Programmer Finware Changelog</a></li>
             </ul>
             
             <h1 id="Usage">Usage</h1>
             <p>The programmer software has multiple functions.</p>
             <p>Get the list of available commands:<br><code>zme_prog7 -h</code></p>
             <p>Get specific parameters for each command:<br><code>zme_prog7 &lt;command&gt; -h</code></p>
-            <p>Common options for all commands:</p>
+            <p>Common options for most commands:</p>
             <table class="wikitable">
                <tbody>
                   <tr>
@@ -230,24 +232,9 @@
                   </tr>
                   <tr>
                      <td><p>-b</p></td>
-                     <td><p>Baud rate</p></td>
-                     <td><p>9600-921600</p></td>
+                     <td><p>Baud rate - it is not necessary to indicate there is an auto search for the required speed</p></td>
+                     <td><p>230400, 460800, 921600</p></td>
                      <td><p>230400</p></td>
-                  </tr>
-                  <tr>
-                     <td>-chip<p></p></td>
-                     <td><p>Chip connected to the programmer</p></td>
-                     <td>
-                        <table class="borderless">
-                           </td></tr>
-                           <tr><td>ZGM130S037HGN1</td></tr>
-                           <tr><td>ZGM230SA27HGN</td></tr>
-                           <tr><td>ZGM230SB27HGN</td></tr>
-                           <tr><td>EFR32MG21A020F1024IM32</td></tr>
-                           <tr><td>MGM210PA32JIA</td></tr>
-                        </table>
-                     </td>
-                     <td><p>ZGM130S037HGN1</p></td>
                   </tr>
                </tbody>
             </table>
