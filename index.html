@@ -29,6 +29,8 @@
                <li><a href="#Usage">Usage</a>
                   <ul>
                      <li><a href="#Info">Show info</a></li>
+                     <li><a href="#ChipInfo">Chip info</a></li>
+                     <li><a href="#ChipSupport">Chip support</a></li>
                      <li><a href="#Keys">Listing keys</a></li>
                      <li><a href="#LoadKey">Load key</a></li>
                      <li><a href="#ClearKey">Clear key</a></li>
@@ -105,14 +107,14 @@
             <h1 id="ProductDescription">Product description</h1>
             <p>Z-Wave.Me Programmer is a full featured programming tool for development, testing, production and production testing of IoT devices based on Z-Wave, Zigbee, Thread and BLE protocols.</b>
             <center><img src="pics/Programmer-side.png" width="30%"></center>
-            <!-- FIXME -->
-            <p>Z-Wave.Me Programmer is able to flash Z-Wave and Zigbee chips by Silicon Labs such as:</p>
+            <p>The Z-Wave.Me programmer can flash the following families of chips from Silicon Labs. For more detailed and accurate information, use <a href="#ChipSupport">Chip support</a>:</p>
             <ul>
-               <li>ZGM130S</li>
-               <li>ZGM230S</li>
-               <li>EFR32ZG23</li>
+               <li>ZGM13</li>
+               <li>ZGM23</li>
                <li>EFR32MG21</li>
-               <li>MGM210</li>
+               <li>MGM21</li>
+               <li>EFR32ZG23</li>
+               <li>EFR32MG24</li>
             </ul>
             
             <h1 id="Package">Package</h1>
@@ -206,7 +208,7 @@
             
             <h1 id="SofwareInstallation">Z-Wave.Me software installation</h1>
             <ul>
-               <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/zme_prog7/00.00.07.00/">Programmer Tool</a></li>
+               <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/zme_prog7/last/">Programmer Tool</a></li>
                <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/zme_prog7/changelog.md">Programmer Tool Changelog</a></li>
                <li><a target="_blank" href="https://storage.z-wave.me/programmer-tool/files/programmer/changelog.md">Programmer Finware Changelog</a></li>
             </ul>
@@ -238,6 +240,24 @@
 
             <h3 id="Info">Show info</h3>
             <p>Show programmer device information:<br><code>zme_prog7 info -d DEVICE [-b BAUDRATE]</code></p>
+            <figure>
+                <img src="pics/example_info.png">
+                <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
+            </figure>
+
+            <h3 id="ChipInfo">Chip info</h3>
+            <p>Shows information about the chip connected via 'swd' to the programmer:<br><code>zme_prog7 chipInfo -d DEVICE [-b BAUDRATE]</code></p>
+            <figure>
+                <img src="pics/example_chip_info.png">
+                <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
+            </figure>
+
+            <h3 id="ChipSupport">Chip support</h3>
+            <p>Displays a list of chips that you can work with. If you do not specify <code>[-d DEVICE]</code> it will display chips supported by <code>zme_prog7</code>:<br><code>zme_prog7 chipSupport [-d DEVICE] [-b BAUDRATE]</code></p>
+            <figure>
+                <img src="pics/example_chip_support.png">
+                <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
+            </figure>
 
             <h3 id="Keys">Listing keys</h3>
             <p>Prints firmware encryptioin keys in the programmer:<br><code>zme_prog7 keys -d DEVICE [-b BAUDRATE]</code></p>
