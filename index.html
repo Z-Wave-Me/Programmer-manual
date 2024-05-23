@@ -65,6 +65,9 @@
                      <li><a href="#presetInfo">Preset info</a></li>
                      <li><a href="#presetSet">Preset set</a></li>
                      <li><a href="#presetReset">Preset reset</a></li>
+                     <li><a href="#radioTest">Radio test</a></li>
+                     <li><a href="#radioManual">Radio manual</a></li>
+                     <li><a href="#radioStop">Radio stop</a></li>
                   </ul>
                </li>
                <li><a href="#Usecases">Use cases</a>
@@ -157,7 +160,7 @@
                      <td><p>ttyUSB2</p></td>
                      <td><p>Programming interface and Zigbee controller</p></td>
                   </tr>
-                  <tr>
+                  <tr id="COMPorts_pti_programmer">
                      <td><p>ttyUSB3</p></td>
                      <td><p>Zigbee sniffer (PTI)</p></td>
                   </tr>
@@ -219,13 +222,13 @@
                      <th><p>Description</p></th>
                      <th><p>Values</p></th>
                   </tr>
-                  <tr>
-                     <td><p>-d</p></td>
+                  <tr id="Usage_device">
+                     <td><p>-d --device</p></td>
                      <td><p>Device file (Unix) or COM-port (Windows)</p></td>
                      <td><p>/dev/ttyUSB2<br/>COM3</p></td>
                   </tr>
-                  <tr>
-                     <td><p>-b</p></td>
+                  <tr id="Usage_baudrate">
+                     <td><p>-b --baudrate</p></td>
                      <td><p>Baud rate - it is not necessary to indicate there is an auto search for the required speed</p></td>
                      <td><p>230400, 460800, 921600</p></td>
                   </tr>
@@ -233,28 +236,28 @@
             </table>
 
             <h3 id="Info">Info</h3>
-            <p>Show programmer device information:<br><code>zme_prog7 info -d --device [-b --baudrate]</code></p>
+            <p>Show programmer device information:<br><code>zme_prog7 info <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="chipInfo">Chip info</h3>
-            <p>Shows information about the chip connected via 'swd' to the programmer:<br><code>zme_prog7 chipInfo -d --device [-b --baudrate]</code></p>
+            <p>Shows information about the chip connected via 'swd' to the programmer:<br><code>zme_prog7 chipInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_chip_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="chipSupport">Chip support</h3>
-            <p>Displays a list of chips that you can work with. If you do not specify <code>[-d --device]</code> it will display chips supported by <code>zme_prog7</code>:<br><code>zme_prog7 chipSupport [-d --device] [-b --baudrate]</code></p>
+            <p>Displays a list of chips that you can work with. If you do not specify <code>[<a href="#Usage_device">-d --device</a>]</code> it will display chips supported by <code>zme_prog7</code>:<br><code>zme_prog7 chipSupport [<a href="#Usage_device">-d --device</a>] <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_chip_support.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="chipLock">Chip lock</h3>
-            <p>Lock the connected device:<br><code>zme_prog7 chipLock -d --device [-b --baudrate]</code></p>
+            <p>Lock the connected device:<br><code>zme_prog7 chipLock <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>The programmer cannot work with a locked device; to make this possible again, use: <a href="#chipUnlock">Chip unlock</a></p>
             <p>After that, if you use <a href="#chipInfo">Chip info</a>, you can see:</p>
             <figure>
@@ -263,48 +266,48 @@
             </figure>
 
             <h3 id="chipUnlock">Chip unlock</h3>
-            <p>Unlock the connected device:<br><code>zme_prog7 chipUnlock -d --device [-b --baudrate]</code></p>
+            <p>Unlock the connected device:<br><code>zme_prog7 chipUnlock <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>After this, the programmer will be able to fully work with the chip</p>
             <p>❗This command will delete almost all chip data - be careful</p>
 
             <h3 id="chipReboot">Chip reboot</h3>
-            <p>Reboot the connected device:<br><code>zme_prog7 chipReboot -d --device [-b --baudrate]</code></p>
+            <p>Reboot the connected device:<br><code>zme_prog7 chipReboot <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>Performs a hard reboot of the connected chip. For this action, the <b>RESET</b> pin is used. More details can be found here <a href="#Pinout">Programming port pinout</a></p>
 
             <h3 id="slotInfo">Slot info</h3>
-            <p>Prints avaliable and occupied slots of the programmer:<br><code>zme_prog7 slotInfo -d --device [-b --baudrate]</code></p>
+            <p>Prints avaliable and occupied slots of the programmer:<br><code>zme_prog7 slotInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_slot_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="slotStore">Slot store</h3>
-            <p>Loads signed image into a slot of the programmer:<br><code>zme_prog7 slotStore &lt;filename&gt; -d --device [-b --baudrate] [-i --index]</code></p>
+            <p>Loads signed image into a slot of the programmer:<br><code>zme_prog7 slotStore &lt;filename&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
             <p>If you specify -i, then you can load into the specified index with overwriting, otherwise it will load at the first available index. If there is not enough free space, it will give an error, also if there are no suitable keys to decrypt the image.</p>
             <p>256 file slots available</p>
 
             <h3 id="slotReset">Slot reset</h3>
-            <p>Clears all slots; when explicitly specifying an index, then only the specified index:<br><code>zme_prog7 slotReset -d --device [-b --baudrate] [-i --index]</code></p>
+            <p>Clears all slots; when explicitly specifying an index, then only the specified index:<br><code>zme_prog7 slotReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
 
             <h3 id="keytInfo">Key info</h3>
-            <p>Shows all available keys:<br><code>zme_prog7 keytInfo -d --device [-b --baudrate]</code></p>
+            <p>Shows all available keys:<br><code>zme_prog7 keytInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_key_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="keyStore">Key store</h3>
-            <p>Loads signed image into a slot of the programmer:<br><code>zme_prog7 keyStore &lt;filename&gt; -d --device [-b --baudrate] [-i --index]</code></p>
+            <p>Loads signed image into a slot of the programmer:<br><code>zme_prog7 keyStore &lt;filename&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
             <p>If you specify -i, then you can load into the specified index with overwriting, otherwise it will load at the first available index. If there is not enough free space, it will give an error.</p>
             <p>16 key slots available</p>
             <p>❗When you delete or replace a key, all downloaded images <a href="#slotStore">Slot store</a> using this key or these keys will be deleted</p>
 
             <h3 id="keyReset">Key reset</h3>
-            <p>Clears all keys; when explicitly specifying an index, then only the specified index:<br><code>zme_prog7 keyReset -d --device [-b --baudrate] [-i --index]</code></p>
+            <p>Clears all keys; when explicitly specifying an index, then only the specified index:<br><code>zme_prog7 keyReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
             <p>❗When you delete or replace a key, all downloaded images <a href="#slotStore">Slot store</a> using this key or these keys will be deleted</p>
 
             <h3 id="keyGen">Key generate</h3>
-            <p>Creates a <b>hex</b> string based on the key file used to create <b>pkzme</b> files:<br><code>zme_prog7 keyGen &lt;uuid&gt; -p --profile -k --key [-b --baudrate]</code></p>
+            <p>Creates a <b>hex</b> string based on the key file used to create <b>pkzme</b> files:<br><code>zme_prog7 keyGen &lt;uuid&gt; -p --profile -k --key <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -335,14 +338,14 @@
              </table>
 
             <h3 id="Update">Update</h3>
-            <p>Checks for new version and, if necessary, update this software:<br><code>zme_prog7 update -d --device [-b --baudrate]</code></p>
+            <p>Checks for new version and, if necessary, update this software:<br><code>zme_prog7 update <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_update.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="erasePage">Erase page</h3>
-            <p>Erase area in the flash memory of the connected chip:<br><code>zme_prog7 erasePage -a --address -l --length -d --device [-b --baudrate]</code></p>
+            <p>Erase area in the flash memory of the connected chip:<br><code>zme_prog7 erasePage -a --address -l --length <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>❗Data is permanently deleted</p>
             <table class="wikitable">
                 <tbody>
@@ -375,12 +378,12 @@
              </table>
 
             <h3 id="eraseMass">Erase mass</h3>
-            <p>Erase the main flash memory of the connected chip:<br><code>zme_prog7 eraseMass -d --device [-b --baudrate]</code></p>
+            <p>Erase the main flash memory of the connected chip:<br><code>zme_prog7 eraseMass <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>You can see the structure of flash memory using <a href="#chipInfo">Chip info</a> - This command will clear the memory <b>Flash addr</b>  and size <b>Flash size</b></p>
             <p>❗Data is permanently deleted</p>
 
             <h3 id="flashData">Flash data</h3>
-            <p>Allows you to write data to the flash of the connected chip:<br><code>zme_prog7 flashData -a --address -da --data -d --device [-b --baudrate]</code></p>
+            <p>Allows you to write data to the flash of the connected chip:<br><code>zme_prog7 flashData -a --address -da --data <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>If you already have data on the flash memory, you won’t be able to overwrite them; first you need to clear the flash memory of the chip; this can be done using <a href="#erasePage">Erase page</a></p>
             <p>A feature of flash memory chips is that you can only rewrite a one to a zero. Zero can be turned into one only by completely erasing the flash page</p>
             <table class="wikitable">
@@ -411,7 +414,7 @@
              </table>
 
             <h3 id="flashRead">Flash read</h3>
-            <p>Allows you to read the contents of the flash memory of the connected chip with the ability to display it in a terminal or save it to a file:<br><code>zme_prog7 flashRead -a --address -l --length -d --device [-o --outFile] [-b --baudrate]</code></p>
+            <p>Allows you to read the contents of the flash memory of the connected chip with the ability to display it in a terminal or save it to a file:<br><code>zme_prog7 flashRead -a --address -l --length <a href="#Usage_device">-d --device</a> [-o --outFile] <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -449,7 +452,7 @@
              </table>
 
             <h3 id="flashFile">Flash file</h3>
-            <p>Write file content into the flash memory of the connected device:<br><code>zme_prog7 flashFile &lt;filename&gt; -d --device [-a --address] [-b --baudrate]</code></p>
+            <p>Write file content into the flash memory of the connected device:<br><code>zme_prog7 flashFile &lt;filename&gt; <a href="#Usage_device">-d --device</a> [-a --address] <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -477,7 +480,7 @@
              </table>
 
             <h3 id="flashProduct">Flash product</h3>
-            <p>Flashes the connected programmer using the firmware loaded into the programmer with the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 flashProduct -d --device [-b --baudrate] [-fi --firmwareIndex] [-bi --bootloaderIndex] [-ki --keyIndex] [-sei --seIndex] [-c --chip] [-u --userData] [-o --options] [-qr --qrCodeDir] [-dp --deviceProfile]</code></p>
+            <p>Flashes the connected programmer using the firmware loaded into the programmer with the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 flashProduct <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-fi --firmwareIndex] [-bi --bootloaderIndex] [-ki --keyIndex] [-sei --seIndex] [-c --chip] [-u --userData] [-o --options] [-qr --qrCodeDir] [-dp --deviceProfile]</code></p>
             <p>If the firmware downloaded by <a href="#slotStore">Slot store</a> was encrypted, then the number of times you can flash it is limited by the license </p>
             <p>If you don’t explicitly specify all or some of the parameters, it will try to select it yourself</p>
             <table class="wikitable">
@@ -558,7 +561,7 @@
             </figure>
 
             <h3 id="configSpeed">Config speed</h3>
-            <p>Set the communication speed with the programmer:<br><code>zme_prog7 configSpeed -d --device [-sapi --sapi] [-swd --swd] [-uart --uart] [-pti --pti] [-b --baudrate]</code></p>
+            <p>Set the communication speed with the programmer:<br><code>zme_prog7 configSpeed <a href="#Usage_device">-d --device</a> [-sapi --sapi] [-swd --swd] [-uart --uart] [-pti --pti] <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -571,7 +574,7 @@
                     <td><p>-sapi --sapi</p></td>
                     <td>
                         <p>Sets the speed SAPI - affects the speed at which <b>zme_prog7</b> communicates with the programmer firmware</p>
-                        <p><b>zme_prog7</b> is capable of determining the speed itself, so it is not necessary to specify it explicitly using <b>[-b --baudrate]</b></p>
+                        <p><b>zme_prog7</b> is capable of determining the speed itself, so it is not necessary to specify it explicitly using <b><a href="#Usage_baudrate">[-b --baudrate]</a></b></p>
                     </td>
                     <td><p>230400, 460800 and 921600</p></td>
                     <td><p></p></td>
@@ -610,18 +613,18 @@
              </table>
 
             <h3 id="lic">License</h3>
-            <p>Load a <b>Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 lic &lt;package&gt; -d --device [-b --baudrate]</code></p>
+            <p>Load a <b>Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 lic &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>You can see the current license status on your programmer using the command <a href="#Info">Info</a> - <b>LICENSE</b></p>
             <p>Pay attention to <b>Flash counter</b> and <b>Max prog</b></p>
             <p><b>Flash counter</b> how many times have you already flashed the firmware from <b>Z-Wave.Me</b></p>
             <p><b>Flash counter max</b> how many times can you flash firmware from <b>Z-Wave.Me</b></p>
 
             <h3 id="licCustom">License custom</h3>
-            <p>Load a <b>custom not Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 licCustom &lt;package&gt; -d --device [-b --baudrate]</code></p>
+            <p>Load a <b>custom not Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 licCustom &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>The package can be generated using the command <a href="#licCustomGen">License custom generate</a></p>
 
             <h3 id="licCustomGen">License custom generate</h3>
-            <p>Load a <b>custom</b> license package in the programmer:<br><code>zme_prog7 licCustomGen &lt;uuid&gt; -d --device [-b --baudrate]</code></p>
+            <p>Load a <b>custom</b> license package in the programmer:<br><code>zme_prog7 licCustomGen &lt;uuid&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>You can see the current license custom status on your programmer using the command <a href="#Info">Info</a> - <b>LICENSE CUSTOM</b></p>
             <p><b>Flash counter</b> how many times have you already flashed the firmware from <b>not Z-Wave.Me</b></p>
             <p><b>Flash counter max</b> how many times can you flash firmware from <b>not Z-Wave.Me</b></p>
@@ -655,7 +658,7 @@
              </table>
 
              <h3 id="fileInfo">File info</h3>
-             <p>Load a <b>Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 lic &lt;filename&gt; -d --device</code></p>
+             <p>Load a <b>Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 lic &lt;filename&gt; <a href="#Usage_device">-d --device</a></code></p>
              <p>Path to the <b>pkzme</b> file you want to get information about</p>
              <p>You can create your own <b>pkzme</b> file using <a href="#fileSign">File sign</a> To do this, you will first need to create your key using <a href="#fileGenKey">File generate key</a></p>
              <figure>
@@ -664,7 +667,7 @@
             </figure>
 
              <h3 id="fileSign">File sign</h3>
-             <p>Allows you to create a <b>pkzme</b> file from firmware like <b>Silabs</b> using your created key <a href="#fileGenKey">File generate key</a>:<br><code>zme_prog7 fileSign &lt;filename&gt; -c --chip -obj --pkzmeObj -d --device  [-o --output] [-p --profile] [-b --baseAddr] [-sv --seVersion]</code></p>
+             <p>Allows you to create a <b>pkzme</b> file from firmware like <b>Silabs</b> using your created key <a href="#fileGenKey">File generate key</a>:<br><code>zme_prog7 fileSign &lt;filename&gt; -c --chip -obj --pkzmeObj <a href="#Usage_device">-d --device</a>  [-o --output] [-p --profile] [-b --baseAddr] [-sv --seVersion]</code></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -744,7 +747,7 @@
              </table>
 
              <h3 id="fileExtract">File extract</h3>
-             <p>Allows you to unpack previously created <b>pkzme</b> files <a href="#fileSign">File sign</a>:<br><code>zme_prog7 fileExtract &lt;filename&gt; -d --device [-o --output] [-p --profile]</code></p>
+             <p>Allows you to unpack previously created <b>pkzme</b> files <a href="#fileSign">File sign</a>:<br><code>zme_prog7 fileExtract &lt;filename&gt; <a href="#Usage_device">-d --device</a> [-o --output] [-p --profile]</code></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -781,7 +784,7 @@
              </table>
 
              <h3 id="fileGenKey">File generate key</h3>
-             <p>Generates key files for files <b>gbl</b> and <b>pkzme</b> :<br><code>zme_prog7 fileGenKey &lt;path&gt; -t --type -d --device</code></p>
+             <p>Generates key files for files <b>gbl</b> and <b>pkzme</b> :<br><code>zme_prog7 fileGenKey &lt;path&gt; -t --type <a href="#Usage_device">-d --device</a></code></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -811,7 +814,7 @@
              </table>
 
              <h3 id="pinoutSet">Pinout set</h3>
-             <p>Allows you to configure the <b>IDC-10</b> programmer:<br><code>zme_prog7 pinoutSet -d --device [-b --baudrate] [-o --options] [-r --reset]</code></p>
+             <p>Allows you to configure the <b>IDC-10</b> programmer:<br><code>zme_prog7 pinoutSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-o --options] [-r --reset]</code></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -894,7 +897,7 @@
              </table>
 
              <h3 id="buttonInfo">Button info</h3>
-             <p>Allows you to view information about the actions assigned to the programmer button:<br><code>zme_prog7 buttonInfo -d --device [-b --baudrate]</code></p>
+             <p>Allows you to view information about the actions assigned to the programmer button:<br><code>zme_prog7 buttonInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
              <p>You can assign an action to a button to the programmer using the command <a href="#buttonSet">Button set</a></p>
              <figure>
                 <img src="pics/example_button_info.png">
@@ -902,7 +905,7 @@
             </figure>
 
              <h3 id="buttonSet">Button set</h3>
-             <p>Allows you to assign an action to the programmer button:<br><code>zme_prog7 buttonSet -a --action -d --device [-b --baudrate]</code></p>
+             <p>Allows you to assign an action to the programmer button:<br><code>zme_prog7 buttonSet -a --action <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
              <p>You can see what action has already been assigned using <a href="#buttonInfo">Button info</a></p>
              <table class="wikitable">
                 <tbody>
@@ -925,7 +928,7 @@
              </table>
              
              <h3 id="RTCSet">RTC set</h3>
-             <p>Set time in the programmer to system time:<br><code>zme_prog7 RTCSet -d --device [-b --baudrate] [-ts --timestamp]</code></p>
+             <p>Set time in the programmer to system time:<br><code>zme_prog7 RTCSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-ts --timestamp]</code></p>
              <p>This command should be used on each power on if the programmer have no battery inserted. To preserve the time without power, the battery should be inserted.</p>
              <p>You can see what time is currently set using <a href="#Info">Info</a> - <b>RTC</b></p>
              <table class="wikitable">
@@ -946,7 +949,7 @@
              </table>
 
              <h3 id="logInfo">Log info</h3>
-             <p>Displays information recorded on external flash memory:<br><code>zme_prog7 logInfo -d --device [-b --baudrate] [-o --output]</code></p>
+             <p>Displays information recorded on external flash memory:<br><code>zme_prog7 logInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-o --output]</code></p>
              <p>Information is recorded during use <a href="#flashProduct">Flash product</a> and also when pressing the programmer button, if a similar action is assigned there <a href="#buttonSet">Button set</a></p>
             <table class="wikitable">
                 <tbody>
@@ -970,11 +973,11 @@
             </figure>
 
              <h3 id="logReset">Log reset</h3>
-             <p>Reset the log file in the programmer internal memory:<br><code>zme_prog7 logReset -d --device [-b --baudrate]</code></p>
+             <p>Reset the log file in the programmer internal memory:<br><code>zme_prog7 logReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
              <p>❗Be careful, all information will be deleted so do not forget to save the log before using this command</p>
 
              <h3 id="presetInfo">Preset info</h3>
-             <p>Shows all saved presets:<br><code>zme_prog7 presetInfo -d --device [-b --baudrate]</code></p>
+             <p>Shows all saved presets:<br><code>zme_prog7 presetInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
              <p>You can install presets using <a href="#presetSet">Preset set</a></p>
               <figure>
                  <img src="pics/example_preset_info.png">
@@ -982,7 +985,7 @@
              </figure>
 
              <h3 id="presetSet">Preset set</h3>
-             <p>Generates a preset based on the firmware previously loaded into the programmers via the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 presetSet -d --device [-b --baudrate] [-fi --firmwareIndex] [-bi --bootloaderIndex] [-ki --keyIndex] [-sei --seIndex] [-c --chip] [-u --userData] [-o --options] [-i --index] [-n --name]</code></p>
+             <p>Generates a preset based on the firmware previously loaded into the programmers via the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 presetSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-fi --firmwareIndex] [-bi --bootloaderIndex] [-ki --keyIndex] [-sei --seIndex] [-c --chip] [-u --userData] [-o --options] [-i --index] [-n --name]</code></p>
              <p>If you don’t explicitly specify all or some of the parameters, it will try to select it yourself</p>
              <p>A total of 10 presets can be saved and used</p>
              <p>You can assign presets to a button using <a href="#buttonSet">Button set</a></p>
@@ -1044,7 +1047,7 @@
                        <td><p></p></td>
                        <td><p></p></td>
                     </tr>
-                    <tr>
+                    <tr id="presetReset_index">
                         <td><p>-i --index</p></td>
                         <td>
                             <p>The index at which you want to save the preset</p>
@@ -1053,7 +1056,7 @@
                         <td><p>0 ... 9</p></td>
                         <td><p></p></td>
                      </tr>
-                     <tr>
+                     <tr id="presetReset_name">
                         <td><p>-n --name</p></td>
                         <td>
                             <p>If you do not specify a name, the default one will be used, it will be created in this form <b>preset xx</b></p>
@@ -1070,204 +1073,95 @@
              </figure>
 
              <h3 id="presetReset">Preset reset</h3>
-             <p>Reset the log file in the programmer internal memory:<br><code>zme_prog7 logReset -d --device [-b --baudrate]</code></p>
+             <p>Resets presets installed via <a href="#presetSet">Preset set</a>:<br><code>zme_prog7 presetReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> <a href="#presetReset_index">[-i --index]</a> <a href="#presetReset_name">[-n --name]</a></code></p>
+             <p>if not <a href="#presetReset_index">[-i --index]</a> or <a href="#presetReset_name">[-n --name]</a> is specified, then it will delete all presets</p>
+
+             <h3 id="radioTest">Radio test</h3>
+             <p>Allows you to run the radio in different modes:<br><code>zme_prog7 radioTest -m --mode  -fr --freq -c --channel -p -power -t --timeout <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+             <p>The command works asynchronously, that is, while the radio is operating, the programmer can be used for its intended purpose</p>
+             <p>You can see what state the radio is in now using <a href="#Info">Info</a> -> <b>RADIO</b></p>
+             <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Option</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                      <th><p>Default</p></th>
+                   </tr>
+                   <tr id="radioTest_mode">
+                      <td><p>-m --mode</p></td>
+                      <td><p>Transmission mode</p></td>
+                      <td>
+                         <table class="borderless">
+                            <tr><td><b>CARRIER</b></td><td>Emit carrier only</td></tr>
+                            <tr><td><b>PN9</b></td><td>Send a polynomium x^9 + x^5 + 1</td></tr>
+                            <tr><td><b>B10</b></td><td>Send 10101010.... sequence</td></tr>
+                            <tr><td><b>PKG</b></td><td>Sends meaningful data from the UUID of the programmer which can be obtained using the command <a href="#Info">Info</a> -> <b>BOARD</b> -> <b>UUID</b>. </td></tr>
+                            <tr><td><b>MODEM</b></td><td>Allows you to receive meaningful data through <a href="#COMPorts_pti_programmer">PTI</a> and send it yourself using the command <a href="#radioManual">Radio manual</a></td></tr>
+                         </table>
+                      </td>
+                      <td><p><b>PKG</b></p></td>
+                   </tr>
+                   <tr>
+                      <td><p>-fr --freq</p></td>
+                      <td><p>Modulation type</p></td>
+                      <td>
+                         <table class="borderless">
+                            <tr><td><b>ZIGBEE</b></td><td>IEEE 802.15.4</td></tr>
+                            <tr><td><b>2P4GHZ_ANTDIV_COEX</b></td><td>IEEE 802.15.4</td></tr>
+                            <tr><td><b>2P4GHZ_COEX</b></td><td>IEEE 802.15.4</td></tr>
+                            <tr><td><b>2P4GHZ_ANTDIV</b></td><td>IEEE 802.15.4</td></tr>
+                            <tr><td><b>2P4GHZ</b></td><td>IEEE 802.15.4</td></tr>
+                            <tr><td><b>BLE_CODED_125KBPS</b></td><td>BLE 125 kbps channel (GFSK)</td></tr>
+                            <tr><td><b>BLE_CODED_500KBPS</b></td><td>BLE 500 kbps channel (GFSK)</td></tr>
+                            <tr><td><b>BLE_1MBPS</b></td><td>BLE 1 Mbps channel (8-DPSK)</td></tr>
+                            <tr><td><b>BLE_2MBPS</b></td><td>BLE 2 Mbps channel (DQPSK)</td></tr>
+                         </table>
+                      </td>
+                      <td><p><b>2P4GHZ</b></p></td>
+                   </tr>
+                   <tr>
+                      <td><p>-c --channel</p></td>
+                      <td><p>Channel number</p></td>
+                      <td>
+                        <p>ZIGBEE, 2P4GHZ_ANTDIV_COEX, 2P4GHZ_COEX, 2P4GHZ_ANTDIV and 2P4GHZ from 11 to 26 </p>
+                        <p>BLE_CODED_125KBPS, BLE_CODED_500KBPS, BLE_1MBPS and BLE_2MBPS from 0 to 39 </p>
+                        </td>
+                      <td><p>11</p></td>
+                   </tr>
+                   <tr>
+                      <td><p>-p -power</p></td>
+                      <td><p>TX power. Units of measurement (raw) do not linearly affect signal strength.</p></td>
+                      <td><p>from 1 to 180 (raw)</p></td>
+                      <td><p>100</p></td>
+                   </tr>
+                   <tr>
+                      <td><p>-t --timeout</p></td>
+                      <td><p>Turn off the test N milliseconds - used in any mode except <a href="#radioTest_mode">MODEM</a></p></td>
+                      <td><p>from 0 to 4294967295</p></td>
+                      <td><p>1000</p></td>
+                   </tr>
+                </tbody>
+             </table>
+
+             <h3 id="radioManual">Radio manual</h3>
+             <p>Allows you to send meaningful data while in <a href="#radioTest_mode">MODEM</a>:<br><code>zme_prog7 radioManual -p --paket<a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+             <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <td><p>-p --paket</p></td>
+                      <td><p>The data packet you wish to send over the radio</p></td>
+                      <td><p>hex string</p></td>
+                      <td><p>110E11223344550F778899AABBCCDDEE</p></td>
+                   </tr>
+                </tbody>
+             </table>
+
+             <h3 id="radioStop">Radio stop</h3>
+             <p>Allows you to stop the radio:<br><code>zme_prog7 radioStop <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+             <p>You can start the radio using the command <a href="#radioTest">Radio test</a></p>
 
 
-            <h3 id="OTAKey">OTA Key load</h3>
-            <p>Load the OTA upgrade key in the connected device:<br><code>zme_prog7 loadOTAKey [-token_encrypt TOKEN_ENCRYPT] [-token_sign TOKEN_SIGN] -d --device [-b --baudrate] [-chip CHIP]</code></p>
-            <p>OTA keys are generated using the Silicon Labs Simplicity Studio:</p>
-            <code><pre>commander.exe gbl keygen --type keygen --type aes-ccm -o encrypt.key
-commander.exe gbl keygen --type ecc-p256 --outfile sign.key</pre></code>
-            <table class="wikitable">
-               <tbody>
-                  <tr>
-                     <th><p>Option</p></th>
-                     <th><p>Description</p></th>
-                     <th><p>Values</p></th>
-                     <th><p>Default</p></th>
-                  </tr>
-                  <tr>
-                     <td><p>-token_encrypt</p></td>
-                     <td><p>Path to the encrypt.key file</p></td>
-                     <td><p></p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-token_sign</p></td>
-                     <td><p>Path to the sign.key file</p></td>
-                     <td><p></p></td>
-                     <td><p></p></td>
-                  </tr>
-               </tbody>
-            </table>
-                        
-                        
-            <!-- <h3 id="LogGet">Logs read</h3>
-            <p>Read logs from the programmer:<br><code>zme_prog7 log_get -d --device [-b --baudrate]</code></p>
-                        
-            <h3 id="LogReset">Logs reset</h3>
-            <p>Reset the log in the programmer:<br><code>zme_prog7 log_reset -d --device [-b --baudrate]</code></p> -->
-                        
-            <!--
-            <h3 id="RadioTest">Radio test</h3>
-            <p>Start radio test on the programmer:<br><code>zme_prog7 radiotest [-d --device] [-b --baudrate] [-m MODE] [-fr MODULATION] [-c CHANNEL] [-p POWER] [-t TIMEOUT]</code></p>
-            <table class="wikitable">
-               <tbody>
-                  <tr>
-                     <th><p>Option</p></th>
-                     <th><p>Description</p></th>
-                     <th><p>Values</p></th>
-                     <th><p>Default</p></th>
-                  </tr>
-                  <tr>
-                     <td><p>-m</p></td>
-                     <td><p>Transmission mode</p></td>
-                     <td>
-                        <table class="borderless">
-                           <tr><td>CARRIER</td><td>Emit carrier only</td></tr>
-                           <tr><td>PN9</td><td>Send a polynomium x^9 + x^5 + 1</td></tr>
-                           <tr><td>B10</td><td>Send 10101010.... sequence</td></tr>
-                           <tr><td>PKG</td><td>Send a packet with random content and the chip UUID at the end</td></tr>
-                           <tr><td>MODEM</td><td>Send and receive commands in Modem mode (see A.R.T. tool https://z-wave.me/manual/zniffer/)</td></tr>
-                        </table>
-                     </td>
-                     <td><p>PKG</p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-fr</p></td>
-                     <td><p>Modulation type</p></td>
-                     <td>
-                        <table class="borderless">
-                           <tr><td>ZIGBEE</td><td>IEEE 802.15.4</td></tr>
-                           <tr><td>2P4GHZ_ANTDIV_COEX</td><td>TBD</td></tr>
-                           <tr><td>2P4GHZ_COEX</td><td>TBD</td></tr>
-                           <tr><td>2P4GHZ_ANTDIV</td><td>TBD</td></tr>
-                           <tr><td>2P4GHZ</td><td>802.15.04 (Zigbee, Matter, Thread)</td></tr>
-                           <tr><td>BLE_CODED_125KBPS</td><td>BLE 125 kbps channel (GFSK)</td></tr>
-                           <tr><td>BLE_CODED_500KBPS</td><td>BLE 500 kbps channel (GFSK)</td></tr>
-                           <tr><td>BLE_1MBPS</td><td>BLE 1 Mbps channel (8-DPSK)</td></tr>
-                           <tr><td>BLE_2MBPS</td><td>BLE 2 Mbps channel (DQPSK)</td></tr>
-                        </table>
-                     </td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-c</p></td>
-                     <td><p>Channel number</p></td>
-                     <td><p><a href="#Channels">see the table</a></p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-p</p></td>
-                     <td><p>TX power</p></td>
-                     <td><p>0 .. 200 (0-20 dBm)</p></td>
-                     <td><p>100 (10 dBm)</p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-t</p></td>
-                     <td><p>Turn off the test N milliseconds</p></td>
-                     <td><p>1 ...</p></td>
-                     <td><p></p></td>
-                  </tr>
-               </tbody>
-            </table>
-            <p>See <a href="#UsecaseRadioTest">examples below</a><p>
-
-            <h3 id="TDB">TBD</h3>
-            <p>TDB:<br><code>zme_prog7 auto_flash_get -d --device [-b --baudrate]</code></p>
-                        
-            <h3 id="TDB">TDB</h3>
-            <p>TDB:<br><code>zme_prog7 auto_flash_set -d --device [-b --baudrate] [-i INDEX] -fi FIRMWARE_INDEX -bi BOOTLOADER_INDEX -ki KEY_INDEX -bri BOOTLOADER_RAM_INDEX [-l LOCK] [-chip CHIP] [-sei SEI_INDEX] [-u USER_DATA]</code></p>
-            <table class="wikitable">
-               <tbody>
-                  <tr>
-                     <th><p>Option</p></th>
-                     <th><p>Description</p></th>
-                     <th><p>Values</p></th>
-                     <th><p>Default</p></th>
-                  </tr>
-                  <tr>
-                     <td><p>-fi</p></td>
-                     <td><p>Firmware slot index</p></td>
-                     <td><p>0 ... 255</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-bi</p></td>
-                     <td><p>Bootloader slot index</p></td>
-                     <td><p>0 ... 255</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>bri</p></td>
-                     <td><p>Bootloader RAM slot index</p></td>
-                     <td><p>0 ... 255</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-sei</p></td>
-                     <td><p>Secure Engine slot index</p></td>
-                     <td><p>0 ... 255</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-ki</p></td>
-                     <td><p>Key slot index</p></td>
-                     <td><p>0 ... 255</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-l</p></td>
-                     <td><p>Lock the chip after flashing</p></td>
-                     <td><p>0 or 1</p></td>
-                     <td><p>1</p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-o</p></td>
-                     <td><p>DSK for Z-Wave devices</p></td>
-                     <td><p>TBD format</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-u</p></td>
-                     <td><p>Defines special user data as a hex-encoded string</p></td>
-                     <td><p>TBD</p></td>
-                     <td><p></p></td>
-                  </tr>
-               </tbody>
-            </table>
-            -->
-
-            <!-- <h3 id="PTISet">PTI mode set</h3>
-            <p>Set the PTI mode and speed on the programmer PTI:<br><code>zme_prog7 pti_set [-m MODE] [-pti_baud PTI_BAUD] [-b --baudrate] -d --device</code></p>
-            <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p>
-            <table class="wikitable">
-               <tbody>
-                  <tr>
-                     <th><p>Option</p></th>
-                     <th><p>Description</p></th>
-                     <th><p>Values</p></th>
-                     <th><p>Default</p></th>
-                  </tr>
-                  <tr>
-                     <td><p>-m</p></td>
-                     <td><p>PTI mode</p></td>
-                     <td><p>0 for off or 1 for on</p></td>
-                     <td><p></p></td>
-                  </tr>
-                  <tr>
-                     <td><p>-pti_baud</p></td>
-                     <td><p>PTI interface baude rate</p></td>
-                     <td><p>460800 ... 255 921600</p></td>
-                     <td><p>460800</p></td>
-                  </tr>
-               </tbody>
-            </table>
-                        
-            <h3 id="PTIGet">PTI mode get</h3>
-            <p>Get the PTI mode and speed on the programmer PTI:<br><code>zme_prog7 pti_get [-b --baudrate] -d --device</code></p>
-            <p>Z-Wave PTI (on port /dev/ttyUSB1) is configured with <code>-d /dev/ttyUSB0</code>, wile Zigbee/Thread/802.15.4 PTI (on port /dev/ttyUSB3) is configured with <code>-d /dev/ttyUSB2</code>.</p> -->
-            
             <h1 id="Usecases">Use cases</h1>
             <p>This programmer is a very powerful tool. Below you can find the typical use cases.</p>
             
@@ -1293,22 +1187,22 @@ zme_prog7 loadImage Firmware.zwaveme.pkzme -d /dev/ttyUSB2
 zme_prog7 loadImage s2c1_se_firmware.zwaveme.pkzme -d /dev/ttyUSB2
 zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
             <p>On the factory use <a href="#UsecaseProductionFlash">app</a> command to flash each device.</p>
-            <!-- <p>Alternatively you can enable the <a href="#UsecaseProductionAutoFlash">production flash by button press</a> mode to work autonomously without even connecting the programmer to a PC.</p> -->
+            <p>Alternatively you can enable the <a href="#UsecaseProductionAutoFlash">production flash by button press</a> mode to work autonomously without even connecting the programmer to a PC.</p> -->
             
             <h3 id="UsecaseProductionFlash">Production flash</h3>
             <p>The factory will use the following command to flash each device.</p>
             <code><pre>zme_prog7 app -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2</pre></code>
             
-            <!-- <h3 id="UsecaseProductionAutoFlash">Production flash by button</h3>
+            <h3 id="UsecaseProductionAutoFlash">Production flash by button</h3>
             <p>The programmer can be turned in the autonomous programming mode with flashing initiated by button press. In this case there is no need to connect the programmer to a PC. Just use a USB power supply to power the programmer.</p>
-            <code><pre>zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2</pre></code> -->
+            <code><pre>zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2</pre></code>
 
             <h3 id="UsecaseLicense">Load a licence</h3>
             <p>The license sets the number of allowed flash operations (flash counter). This ensures the factory can't produce more devices you ordered. Always have 10% extra count for rework on the factory side.</p>
             <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
             <code>zme_prog7 lic EB6BEEAC1A07D48BA24FF0AC6...C7 -d /dev/ttyUSB2</code>
 
-            <!--
+            
             <h3 id="UsecaseRadioTest">Radio tests</h3>
             <p>Production or FCC/CE certification tests examples:</p>
             <p>Z-Wave on EU 868.42 MHz 9.6 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
@@ -1327,7 +1221,7 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
             <p>BLE 2 Mbps on 2402 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 0 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
             <p>BBLE 2 Mbps on 2440 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 19 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
             <p>BLE 2 Mbps on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 39 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
-            -->
+           
 
             <h1 id="TechnicalSpecifications">Technical specifications</h1>
             <table class="wikitable">
