@@ -72,19 +72,16 @@
                </li>
                <li><a href="#Usecases">Use cases</a>
                   <ul>
-                     <li><a href="#UsecaseFlash">Flash a binary file</a></li>
-                     <li><a href="#UsecaseProductionFlash">Prepare to production</a></li>
-                     <li><a href="#UsecaseProductionFlash">Production flash</a></li>
-                     <li><a href="#UsecaseLicense">Load a licence</a></li>
+                     <li><a href="#example_flash_file">Example flash a binary file</a></li>
+                     <li><a href="#example_lic">Example load a licence <b>Z-Wave.Me</b></a></li>
+                     <li><a href="#example_radio_test_programmer">Example radio tests</a></li>
                   </ul>
                </li>
                <li><a href="#TechnicalSpecifications">Technical specifications</a></li>
                <li><a href="#Requirements">Requirements</a>
                <li><a href="#Troubleshooting">Troubleshooting</a></li>
                <li><a href="#Revision">Document revision</a></li>
-               <!--
                <li><a href="#Channels">Channels and modulation</a></li>
-               -->
             </ul>
          </nav>
       </aside>
@@ -691,6 +688,7 @@
 
             <h3 id="flashFile">Flash file</h3>
             <p>Write file content into the flash memory of the connected device:<br><code>zme_prog7 flashFile &lt;filename&gt; <a href="#Usage_device">-d --device</a> [-a --address] <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+            <p><a href="#example_flash_file">examples of using</a></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -699,7 +697,10 @@
                    </tr>
                    <tr>
                     <td><p>filename</p></td>
-                    <td><p>Flash a binary file in .bin or .hex format into the connected device</p></td>
+                    <td>
+                        <p>Flash a binary file in .bin or .hex format into the connected device</p>
+                        <p>You can also flash the key generated earlier using the command <a href="#fileGenKey">File generate key</a></p>
+                    </td>
                  </tr>
                  <tr>
                     <td><p>-a --address</p></td>
@@ -833,6 +834,7 @@
             <h3 id="lic">License</h3>
             <p>Load a <b>Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 lic &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>You can see the current license status <a href="#Info_license">LICENSE</a></p>
+            <p><a href="#example_lic">examples of using</a></p>
 
             <h3 id="licCustom">License custom</h3>
             <p>Load a <b>custom not Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 licCustom &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
@@ -1217,6 +1219,7 @@
              <p>Allows you to run the radio in different modes:<br><code>zme_prog7 radioTest -m --mode  -fr --freq -c --channel -p -power -t --timeout <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
              <p>The command works asynchronously, that is, while the radio is operating, the programmer can be used for its intended purpose</p>
              <p>You can see what state the radio is in now using <a href="#Info_radio">RADIO</a></p>
+             <p><a href="#example_radio_test_programmer">examples of using</a></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -1261,8 +1264,8 @@
                       <td><p>-c --channel</p></td>
                       <td><p>Channel number</p></td>
                       <td>
-                        <p>ZIGBEE, 2P4GHZ_ANTDIV_COEX, 2P4GHZ_COEX, 2P4GHZ_ANTDIV and 2P4GHZ from 11 to 26 </p>
-                        <p>BLE_CODED_125KBPS, BLE_CODED_500KBPS, BLE_1MBPS and BLE_2MBPS from 0 to 39 </p>
+                        <p>ZIGBEE, 2P4GHZ_ANTDIV_COEX, 2P4GHZ_COEX, 2P4GHZ_ANTDIV and 2P4GHZ from 11 to 26 <br> <a href="#Channels_zigbee">channel frequency correspondence table</a></p>
+                        <p>BLE_CODED_125KBPS, BLE_CODED_500KBPS, BLE_1MBPS and BLE_2MBPS from 0 to 39 <br> <a href="#Channels_blue">channel frequency correspondence table</a> </p>
                         </td>
                       <td><p>11</p></td>
                    </tr>
@@ -1302,62 +1305,35 @@
             <h1 id="Usecases">Use cases</h1>
             <p>This programmer is a very powerful tool. Below you can find the typical use cases.</p>
             
-            <h3 id="UsecaseFlash">Flash a binary file</h3>
+            <h3 id="example_flash_file">Example flash a binary file</h3>
             <p>When developing, one typically want to flash the Secure Engine firmware (should be done once), the bootloader and the firmware. Here is an example:</p>
-            <code><pre>zme_prog7 flash s2c1_se_firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
-zme_prog7 masserase -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
-zme_prog7 loadOTAKey -token_encrypt ota_encrypt.key -token_sign ota_sign.key -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
-zme_prog7 flash bootloader.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2
-zme_prog7 flash firmware.hex -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2</pre></code>
+            <code>
+                <pre>
+zme_prog7 <a href="#flashFile">flashFile</a> s2c1_se_firmware.hex -d /dev/ttyUSB2
+zme_prog7 <a href="#flashFile">flashFile</a> &lt;key&gt; -d /dev/ttyUSB2
+zme_prog7 <a href="#flashFile">flashFile</a> bootloader.hex  -d /dev/ttyUSB2
+zme_prog7 <a href="#flashFile">flashFile</a> firmware.hex  -d /dev/ttyUSB2
+                </pre>
+            </code>
             <p>Secure Engine bootloader is typically taked from <a href="https://github.com/SiliconLabs/gecko_sdk/tree/gsdk_4.3/util/se_release/public">SiLabs git</a>. If the connected device is based on a chip that does not have a Secure Engine, skip the step with loading Secure Engine firmware.</p>
             <p>The bootloader and the firmware are compiled using the Simplicity Studio.</p>
 
 
-            <h3 id="UsecaseProductionFlash">Prepare to production</h3>
-            <p>You can load files in the programmer, set the flash counter with <a href="#UsecaseLicense">the license</a> and send it to the factory for production.</p>
-            <p>.pkzme files are encrypted and can be safely sent over the internet.</p>
-            <p>Data in slots can not be extracted back from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
-            <code><pre>zme_prog7 reset -d /dev/ttyUSB2
-zme_prog7 loadImage BootloaderRam.pkzme -d /dev/ttyUSB2
-zme_prog7 loadImage Bootloader.pkzme -d /dev/ttyUSB2
-zme_prog7 loadImage Firmware.zwaveme.pkzme -d /dev/ttyUSB2
-zme_prog7 loadImage s2c1_se_firmware.zwaveme.pkzme -d /dev/ttyUSB2
-zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
-            <p>On the factory use <a href="#UsecaseProductionFlash">app</a> command to flash each device.</p>
-            <p>Alternatively you can enable the <a href="#UsecaseProductionAutoFlash">production flash by button press</a> mode to work autonomously without even connecting the programmer to a PC.</p> -->
-            
-            <h3 id="UsecaseProductionFlash">Production flash</h3>
-            <p>The factory will use the following command to flash each device.</p>
-            <code><pre>zme_prog7 app -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2</pre></code>
-            
-            <h3 id="UsecaseProductionAutoFlash">Production flash by button</h3>
-            <p>The programmer can be turned in the autonomous programming mode with flashing initiated by button press. In this case there is no need to connect the programmer to a PC. Just use a USB power supply to power the programmer.</p>
-            <code><pre>zme_prog7 auto_flash -bri 0 -bi 1 -fi 2 -sei 3 -ki 4 -c EFR32MG21A020F1024IM32 -d /dev/ttyUSB2</pre></code>
-
-            <h3 id="UsecaseLicense">Load a licence</h3>
+            <h3 id="example_lic">Example load a licence <b>Z-Wave.Me</b></h3>
             <p>The license sets the number of allowed flash operations (flash counter). This ensures the factory can't produce more devices you ordered. Always have 10% extra count for rework on the factory side.</p>
             <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
-            <code>zme_prog7 lic EB6BEEAC1A07D48BA24FF0AC6...C7 -d /dev/ttyUSB2</code>
+            <code>zme_prog7 <a href="#lic">lic</a> EB6BEEAC1A07D48BA24FF0AC6...C7 -d /dev/ttyUSB2</code>
 
-            
-            <h3 id="UsecaseRadioTest">Radio tests</h3>
+            <h3 id="example_radio_test_programmer">Example radio tests</h3>
             <p>Production or FCC/CE certification tests examples:</p>
-            <p>Z-Wave on EU 868.42 MHz 9.6 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on EU 868.42 MHz 40 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on EU 869.85 MHz 100 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on US 868.42 MHz 9.6 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on US 908.42 MHz 40 kpbs:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on US 916.00 MHz 100 kpbs:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on US LR 912 Mz 100 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
-            <p>Z-Wave on US LR 920 Mz 100 kbps:<br><code>zme_prog7 radiotest -m PN9 -c TBD -fr TBD -p 200 -t 10000 -d COM5</code></p>
+
+            <p>Zigbee on 2405 MHz:<br><code>zme_prog7 <a href="#radioTest">radioTest</a> -m PN9 -c 11 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code>
+            <p>Zigbee on 2440 MHz:<br><code>zme_prog7 <a href="#radioTest">radioTest</a> -m PN9 -c 18 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code></p>
+            <p>Zigbee on 2480 MHz:<br><code>zme_prog7 <a href="#radioTest">radioTest</a> -m PN9 -c 26 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code></p>
             
-            <p>Zigbee on 2405 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 11 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code>
-            <p>Zigbee on 2440 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 18 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code></p>
-            <p>Zigbee on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 26 -fr 2P4GHZ -p 200 -t 10000 -d COM5</code></p>
-            
-            <p>BLE 2 Mbps on 2402 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 0 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
-            <p>BBLE 2 Mbps on 2440 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 19 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
-            <p>BLE 2 Mbps on 2480 MHz:<br><code>zme_prog7 radiotest -m PN9 -c 39 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+            <p>BLE 2 Mbps on 2402 MHz:<br><code>zme_prog7 <a href="#radioTest">radioTest</a> -m PN9 -c 0 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+            <p>BBLE 2 Mbps on 2440 MHz:<br><code>zme_prog7 <a href="#radioTest">radioTest</a> -m PN9 -c 19 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
+            <p>BLE 2 Mbps on 2480 MHz:<br><code>zme_prog7 <a href="#radioTest">radioTest</a> -m PN9 -c 39 -fr BLE_2MBPS -p 200 -t 10000 -d COM5</code></p>
            
 
             <h1 id="TechnicalSpecifications">Technical specifications</h1>
@@ -1416,7 +1392,7 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
                <tbody>
                   <tr><td><b>Problem</b></td><td>Programming fails immediately of a while after starting</td></tr>
                   <tr><td><b>Cause</b></td><td>The programming cable is too long</td></tr>
-                  <tr><td><b>Solution</b></td><td>Reduce the cable length or slow down the programming speed using <code>swd_set -new</code></td></tr>
+                  <tr><td><b>Solution</b></td><td>Reduce the cable length or slow down the programming speed using <a href="#configSpeed">Config speed</a></td></tr>
                   <tr><td colspan="2">&nbsp;</td></tr>
                   <tr><td><b>Problem</b></td><td>The software tool can't communicate with the programmer</td></tr>
                   <tr><td><b>Cause</b></td><td>Bad cable or wrong port selected</td></tr>
@@ -1460,17 +1436,15 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
                </tbody>
             </table>
 
-            <!--
             <h1 id="Channels">Channels and modulation</h1>
-            <h3>Z-Wave</h3>
+            <!-- <h3>Z-Wave</h3>
             <table class="wikitable">
                <tbody>
                   <tr><td>Region</td><td>Channel</td><td>Frequency, MHz</td><td>Modulation</td><td>Channel bandwidth, kHz</td></tr>
                   <tr><td>TBD</td><td></td><td></td><td></td><td></td></tr>
                </tbody>
-            </table>
-            
-            <h3>802.15.4 PHY (Zigbee, Thread, Matter)</h3>
+            </table> -->
+            <h3 id="Channels_zigbee">802.15.4 PHY (Zigbee, Thread, Matter)</h3>
             <p>Zigbee channels are numbered from 11 to 26.</p>
             <p>Modulation is OQPSK.</p>
             <p>Channel bandwidth is 250 kbps.</p>
@@ -1488,7 +1462,7 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
                </tbody>
             </table>
 
-            <h3>Bluetooth Low Energy</h3>
+            <h3 id="Channels_blue">Bluetooth Low Energy</h3>
             <p>Bluetooth Low Energy channels are numbered from 0 to 39. Channels 37, 38, and 39 are Advertizing channels.</p>
             <p>Modulation depends on the bandwidth:
                <ul>
@@ -1523,7 +1497,7 @@ zme_prog7 loadImage ota_key.pkzme -d /dev/ttyUSB2</pre></code>
                   <tr><td>19</td><td>17</td><td>2440</td><td>39</td><td>39 (advertising)</td><td>2480</td></tr>
                </tbody>
             </table>
-            -->
+           
          </div>
       </div>
    </body>
