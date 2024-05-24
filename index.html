@@ -129,15 +129,20 @@
             <h1 id="Connecting">Connecting</h1>
             <p>The front panel of the programmer has one programming port an with IDC-10 male 10-pins (2x5) connector with pitch 2.54 mm.</p>
             <center><img src="pics/Programmer-front-annotations.png" width="30%"></center>
-            <p>On the top panel there is a status LED and a programming button</p>
-            <p>The back panel has the USB-C port. This port is used to power the programmer (in autonomous mode) and to flash and upload fimwares in the programmer when connected to a PC.</p>
+            <p>On the top panel there is a status LED and a programming button. You can configure how the button works using the command <a href="#buttonSet">Button set</a></p>
+            <p>The back panel has the USB-C port. This port is used to power the programmer and to flash and upload fimwares in the programmer when connected to a PC.</p>
             <p>In addition the programmer has two RP-SMA female connectors for 868/916 MHz (for Z-Wave) and 2.4 GHz antennas (for Zigbee, Thread and BLE). Those antennas are used for production test and as an RF sniffer.</p>
             <center><img src="pics/Programmer-back-annotations.png" width="30%"></center>
             <h1 id="Pinout">Programming port pinout</h1>
             <p>The programming cable connector has IDC-10 female connector on one side. On the other side it should be adjusted to your device depending on the programming pads on the PCB. The programmer port is also compatible with the Tag Connect TC2050-IDC cable.</p>
-            <p>❗ It is important to keep the programming cable length as short as possible. The SWD and SWD/UART protocols used to program chips run on a very high speed.<p>
-            <p>Programming port pinout:</p>
-            <center><img src="pics/Programmer-port-pinout.svg" width="30%"></center>
+            <p>❗ It is important to keep the programming cable length as short as possible. The SWD and SWD/UART protocols used to program chips run on a very high speed. You can adjust the speed using the command <a href="#configSpeed">Config speed</a><p>
+            <p>Programming port pinout (You can see a more accurate configuration using <a href="#Info_pinout">PINOUT</a> and customize it to your needs using <a href="#pinoutSet">Pinout set</a>):</p>
+             <figure>
+                <center>
+                    <img src="pics/Programmer-port-pinout.svg" width="30%">
+                    <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
+                </center>
+            </figure>
             <p>Chip programming requires only SWDIO, SWCLK, RESET and GND. If power is not provided to the chip, VCC is also needed.</p>
 
             <h1 id="COMPorts">COM-ports</h1>
@@ -200,8 +205,8 @@
             </table>
 
             <h1 id="Button">Programming button</h1>
-            <!-- FIXME -->
-            <p>The programming button can be used to start flashing in <a href="#UsecaseProductionAutoFlash">autonomous mode</a>.</p>
+            <p>You can configure how the button works using the command <a href="#buttonSet">Button set</a></p>
+            <p>Create a preset with a command <a href="#presetSet">Preset set</a> and assigning it to the button <a href="#buttonSet">Button set</a> - this will allow you to sew using a button bypassing the terminal.</p>
             
             <h1 id="SofwareInstallation">Z-Wave.Me software installation</h1>
             <ul>
@@ -241,9 +246,184 @@
                 <img src="pics/example_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
+            <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Group</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                   </tr>
+                   <tr id="Info_board">
+                      <td><p>BOARD</p></td>
+                      <td><p>general information about the programmer</p></td>
+                      <td>
+                         <table class="borderless">
+                            <tr>
+                                <td><b>UUID</b></td>
+                                <td>Unique number of your programmer. You will need it in teams uuid: <a href="#keyGen">Key generate</a>, <a href="#licCustomGen">License custom generate</a></td>
+                            </tr>
+                         </table>
+                      </td>
+                   </tr>
+                   <tr id="Info_speed">
+                    <td><p>SPEED</p></td>
+                    <td><p>current programmer interface speed settings, you can configure it using <a href="#configSpeed">Config speed</a></p></td>
+                    <td>
+                       <table class="borderless">
+                          <tr>
+                              <td><b>SAPI</b></td>
+                              <td>
+                                affects the speed at which <b>zme_prog7</b> communicates with the programmer firmware<br>
+                                <b>zme_prog7</b> is capable of determining the speed itself, so it is not necessary to specify it explicitly using <b><a href="#Usage_baudrate">[-b --baudrate]</a></b>
+                              </td>
+                          </tr>
+                          <tr>
+                            <td><b>SWD</b></td>
+                            <td>
+                                this is the speed of interaction via the SWD protocol with the connected chip via IDC-10<br>
+                                These are all commands that interact with the connected chip, but first of all this is the command <a href="#flashFile">Flash file</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>SWD UART</b></td>
+                            <td>
+                                this is the flashing speed when commanded <a href="#flashProduct">Flash product</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>PTI</b></td>
+                            <td>
+                                this affects the speed at which the radio will output data about received radio packets
+                            </td>
+                        </tr>
+                       </table>
+                    </td>
+                 </tr>
+                 <tr id="Info_radio">
+                    <td><p>RADIO</p></td>
+                    <td><p>shows current radio status</p></td>
+                    <td>
+                       <table class="borderless">
+                          <tr>
+                              <td><b>MODE</b></td>
+                              <td><b>IDLE</b> - radio is not active, <a href="#radioTest_mode">other values</a></td>
+                          </tr>
+                          <tr>
+                            <td><b>PROTOCOL</b></td>
+                            <td>Current protocol <a href="#radioTest_freq">more information</a></td>
+                        </tr>
+                        <tr>
+                            <td><b>CHANNEL</b></td>
+                            <td>Current channel <a href="#radioTest_channel">more information</a></td>
+                        </tr>
+                        <tr>
+                            <td><b>POWER</b></td>
+                            <td>Current power <a href="#radioTest_power">more information</a></td>
+                        </tr>
+                       </table>
+                    </td>
+                 </tr>
+                 <tr id="Info_rtc">
+                    <td><p>RTC</p></td>
+                    <td><p>shows information about the set time, you can configure it using the command <a href="#RTCSet">RTC set</a></p></td>
+                    <td>
+                       <table class="borderless">
+                          <tr>
+                              <td><b>UTC</b></td>
+                              <td>time for which the programmer is set</td>
+                          </tr>
+                          <tr>
+                            <td><b>LOCAL</b></td>
+                            <td>time for which the programmer is set, taking into account your current zone</td>
+                        </tr>
+                       </table>
+                    </td>
+                 </tr>
+                   <tr id="Info_pinout">
+                    <td><p>PINOUT</p></td>
+                    <td><p>reflects the actual setting of your <b>IDC-10</b>. You can configure it using <a href="#pinoutSet">Pinout set</a></p></td>
+                    <td>
+                        <table class="borderless">
+                            <tr>
+                               <td><b>VCC</b></td>
+                               <td>3V/+ - to power the connected chip</td>
+                            </tr>
+                            <tr>
+                                <td><b>GND</b></td>
+                                <td>Ground/0 - to power the connected chip</td>
+                            </tr>
+                            <tr>
+                                <td><b>RESET</b></td>
+                                <td>❗Allows you to perform a hard reset of the connected chip, necessary for carriage work with chips via swd</td>
+                            </tr>
+                            <tr>
+                                <td><b>N/C</b></td>
+                                <td>disabled</td>
+                            </tr>
+                            <tr>
+                                <td><b>N/A</b></td>
+                                <td>can not use</td>
+                            </tr>
+                            <tr>
+                                <td><b>BTN</b></td>
+                                <td>button - You can assign actions to it using the command <a href="#buttonSet">Button set</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>SWDIO</b></td>
+                                <td>❗Required for <b>swd</b> to work</td>
+                            </tr>
+                            <tr>
+                                <td><b>SWCLK</b></td>
+                                <td>❗Required for <b>swd</b> to work</td>
+                            </tr>
+                            <tr>
+                                <td><b>SWO</b></td>
+                                <td>On development stage</td>
+                            </tr>
+                            <tr>
+                                <td><b>GPC</b></td>
+                                <td>On development stage</td>
+                            </tr>
+                        </table>
+                     </td>
+                 </tr>
+                 <tr id="Info_license_custom">
+                    <td><p>LICENSE CUSTOM</p></td>
+                    <td><p>information about your license from <b>not Z-Wave.Me</b>, you can install your license using the command <a href="#licCustom">License custom</a>, having previously generated using <a href="#licCustomGen">License custom generate</a></p></td>
+                    <td>
+                       <table class="borderless">
+                          <tr>
+                              <td><b>Flash counter</b></td>
+                              <td>how many times have you already flashed the firmware from <b>not Z-Wave.Me</b></td>
+                          </tr>
+                          <tr>
+                            <td><b>Flash counter max</b></td>
+                            <td>how many times can you flash firmware from <b>not Z-Wave.Me</b></td>
+                        </tr>
+                       </table>
+                    </td>
+                 </tr>
+                 <tr id="Info_license">
+                    <td><p>LICENSE</p></td>
+                    <td><p>information about your license from <b>Z-Wave.Me</b>, you can install your license using the command <a href="#lic">License</a></p></td>
+                    <td>
+                       <table class="borderless">
+                          <tr>
+                              <td><b>Flash counter</b></td>
+                              <td>how many times have you already flashed the firmware from <b>Z-Wave.Me</b></td>
+                          </tr>
+                          <tr>
+                            <td><b>Flash counter max</b></td>
+                            <td>how many times can you flash firmware from <b>Z-Wave.Me</b></td>
+                        </tr>
+                       </table>
+                    </td>
+                 </tr>
+                </tbody>
+             </table>
 
             <h3 id="chipInfo">Chip info</h3>
-            <p>Shows information about the chip connected via 'swd' to the programmer:<br><code>zme_prog7 chipInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+            <p>Shows information about the chip connected via <b>swd</b> to the programmer:<br><code>zme_prog7 chipInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <figure>
                 <img src="pics/example_chip_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
@@ -276,6 +456,7 @@
 
             <h3 id="slotInfo">Slot info</h3>
             <p>Prints avaliable and occupied slots of the programmer:<br><code>zme_prog7 slotInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+            <p>You can load into slots using <a href="#slotStore">Slot store</a>, reset their contents <a href="#slotReset">Slot reset</a></p>
             <figure>
                 <img src="pics/example_slot_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
@@ -283,28 +464,106 @@
 
             <h3 id="slotStore">Slot store</h3>
             <p>Loads signed image into a slot of the programmer:<br><code>zme_prog7 slotStore &lt;filename&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
-            <p>If you specify -i, then you can load into the specified index with overwriting, otherwise it will load at the first available index. If there is not enough free space, it will give an error, also if there are no suitable keys to decrypt the image.</p>
-            <p>256 file slots available</p>
+            <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Option</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                   </tr>
+                   <tr>
+                    <td><p>filename</p></td>
+                    <td><p>path to the <b>pkzme</b> file you want to load into the slot</a></p></td>
+                    <td><p><b>pkzme</b> the file can be obtained from <b>Z-Wave.Me</b> or you can create it yourself using <a href="#fileSign">File sign</a></p></td>
+                 </tr>
+                 <tr>
+                    <td><p>-i --index</p></td>
+                    <td>
+                        <p>Index of the slot where you want to load the <b>pkzme</b> file</p>
+                        <p>If you specify, then you can load into the specified index with overwriting, otherwise it will load at the first available index. If there is not enough free space, it will give an error, also if there are no suitable keys to decrypt the image.</p>
+                        <p>To install the key to successfully download <b>pkzme</b> use the command <a href="#keyStore">Key store</a></p>
+                    </td>
+                    <td><p>from 0 to 255</p></td>
+                 </tr>
+                </tbody>
+             </table>
 
             <h3 id="slotReset">Slot reset</h3>
-            <p>Clears all slots; when explicitly specifying an index, then only the specified index:<br><code>zme_prog7 slotReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
+            <p>Clears slots previously written using the command <a href="#slotStore">Slot store</a>, You can see which slots are used using <a href="#slotInfo">Slot info</a>:<br><code>zme_prog7 slotReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
+            <p>❗Be careful all data is permanently deleted</p>
+            <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Option</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                   </tr>
+                 <tr>
+                    <td><p>-i --index</p></td>
+                    <td>
+                        <p>If you do not specify, then all files in the slots will be deleted, otherwise only the specified one</p>
+                    </td>
+                    <td><p>from 0 to 255</p></td>
+                 </tr>
+                </tbody>
+             </table>
 
             <h3 id="keytInfo">Key info</h3>
             <p>Shows all available keys:<br><code>zme_prog7 keytInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+            <p>You can download the key using <a href="#keyStore">Key store</a>, download using the command <a href="#keyReset">Key reset</a></p>
             <figure>
                 <img src="pics/example_key_info.png">
                 <figcaption> <i>These images are for reference only - output may vary in final product.</i></figcaption>
             </figure>
 
             <h3 id="keyStore">Key store</h3>
-            <p>Loads signed image into a slot of the programmer:<br><code>zme_prog7 keyStore &lt;filename&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
-            <p>If you specify -i, then you can load into the specified index with overwriting, otherwise it will load at the first available index. If there is not enough free space, it will give an error.</p>
-            <p>16 key slots available</p>
-            <p>❗When you delete or replace a key, all downloaded images <a href="#slotStore">Slot store</a> using this key or these keys will be deleted</p>
+            <p>Loads keys into your programmer for loading <b>pkzme</b> files using the command <a href="#slotStore">Slot store</a> :<br><code>zme_prog7 keyStore &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
+            <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Option</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                   </tr>
+                   <tr>
+                    <td><p>package</p></td>
+                    <td>
+                        <p>Key for loading into the <b>pkzme</b> programmer</p>
+                        <p>The key can be obtained from <b>Z-Wave.Me</b> or you can generate it yourself using the command <a href="#keyGen">Key generate</a></p>
+                    </td>
+                    <td><p>hex string</p></td>
+                 </tr>
+                 <tr>
+                    <td><p>-i --index</p></td>
+                    <td>
+                        <p>If not specified, it will be loaded into the first free slot</p>
+                        <p>❗When replacing a key that is already in the slot with a new one, all <b>pkzme</b> files associated with this key will be deleted</p>
+                    </td>
+                    <td><p>from 0 to 15</p></td>
+                 </tr>
+                </tbody>
+             </table>
+
 
             <h3 id="keyReset">Key reset</h3>
-            <p>Clears all keys; when explicitly specifying an index, then only the specified index:<br><code>zme_prog7 keyReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
-            <p>❗When you delete or replace a key, all downloaded images <a href="#slotStore">Slot store</a> using this key or these keys will be deleted</p>
+            <p>Removes keys:<br><code>zme_prog7 keyReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
+            <table class="wikitable">
+                <tbody>
+                   <tr>
+                      <th><p>Option</p></th>
+                      <th><p>Description</p></th>
+                      <th><p>Values</p></th>
+                   </tr>
+                 <tr>
+                    <td><p>-i --index</p></td>
+                    <td>
+                        <p>If you do not specify, all keys will be deleted</p>
+                        <p>❗When deleting a key/keys, all <b>pkzme</b> files associated with this key/keys will be deleted</p>
+                    </td>
+                    <td><p>from 0 to 15</p></td>
+                 </tr>
+                </tbody>
+             </table>
 
             <h3 id="keyGen">Key generate</h3>
             <p>Creates a <b>hex</b> string based on the key file used to create <b>pkzme</b> files:<br><code>zme_prog7 keyGen &lt;uuid&gt; -p --profile -k --key <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
@@ -314,25 +573,24 @@
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
                       <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>uuid</p></td>
-                    <td><p>UUID of your programmer, you can find it out using <a href="#Info">Info</a></p></td>
-                    <td><p></p></td>
-                    <td><p></p></td>
+                    <td><p><a href="#Info_board">UUID</a> of your programmer</p></td>
+                    <td><p>hex string</p></td>
                  </tr>
                  <tr>
                     <td><p>-p --profile</p></td>
-                    <td><p>The key file that was used to create <b>pkzme</b> files</p></td>
-                    <td><p></p></td>
+                    <td>
+                        <p>The key file that was used to create <b>pkzme</b> files</p>
+                        <p>You can create it using the command <a href="#fileGenKey">File generate key</a></p>
+                    </td>
                     <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-k --key</p></td>
                     <td><p>Your personal key, which will be received with the license, is tied to your programmer</p></td>
-                    <td><p></p></td>
-                    <td><p></p></td>
+                    <td><p>hex string</p></td>
                  </tr>
                 </tbody>
              </table>
@@ -352,8 +610,6 @@
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>-a --address</p></td>
@@ -361,8 +617,6 @@
                         <p>The address from which flash memory cleaning will start, it must be a multiple of the size of the flash page</p>
                         <p>You can find out the size of the flash page of the chip using the command <a href="#chipInfo">Chip info</a> - <b>Flash page size</b></p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-l --length</p></td>
@@ -371,8 +625,6 @@
                         <p>If the flash area itself is smaller than the size of the flash page, then you need to indicate the actual size</p>
                         <p>You can find out the size of the flash page of the chip using the command <a href="#chipInfo">Chip info</a> - <b>Flash page size</b></p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                 </tbody>
              </table>
@@ -391,24 +643,18 @@
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>-a --address</p></td>
                     <td>
                         <p>Any valid address of the flash memory of the chip, you can see the available flash memory of the chip using <a href="#chipInfo">Chip info</a></p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-da --data</p></td>
                     <td>
                         <p>Valid <b>hex</b> data string. Does not exceed the available flash memory area</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                 </tbody>
              </table>
@@ -420,24 +666,18 @@
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>-a --address</p></td>
                     <td>
                         <p>Any valid address of the flash memory of the chip, you can see the available flash memory of the chip using <a href="#chipInfo">Chip info</a></p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-l --length</p></td>
                     <td>
                         <p>The size of the memory you want to read, you can see the available flash memory of the chip using <a href="#chipInfo">Chip info</a></p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-o --outFile</p></td>
@@ -445,8 +685,6 @@
                         <p>Path to the file in which you want to save the read data; if not specified, it will output everything to the terminal</p>
                         <p>The data will be saved in binary form</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                 </tbody>
              </table>
@@ -458,14 +696,10 @@
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>filename</p></td>
                     <td><p>Flash a binary file in .bin or .hex format into the connected device</p></td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-a --address</p></td>
@@ -473,8 +707,6 @@
                         <p>Any valid address of the flash memory of the chip, you can see the available flash memory of the chip using <a href="#chipInfo">Chip info</a></p>
                         <p>This only needs to be specified for .bin files.</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                 </tbody>
              </table>
@@ -483,74 +715,70 @@
             <p>Flashes the connected programmer using the firmware loaded into the programmer with the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 flashProduct <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-fi --firmwareIndex] [-bi --bootloaderIndex] [-ki --keyIndex] [-sei --seIndex] [-c --chip] [-u --userData] [-o --options] [-qr --qrCodeDir] [-dp --deviceProfile]</code></p>
             <p>If the firmware downloaded by <a href="#slotStore">Slot store</a> was encrypted, then the number of times you can flash it is limited by the license </p>
             <p>If you don’t explicitly specify all or some of the parameters, it will try to select it yourself</p>
+            <p>Logging is also carried out into external flash memory; you can view the contents of the log using the command <a href="#logInfo">Log info</a></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
                       <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
-                   <tr>
+                   <tr id="flashProduct_firmwareIndex">
                       <td><p>-fi --firmwareIndex</p></td>
                       <td><p>Firmware slot index - the main firmware file is always required</p></td>
                       <td><p>0 ... 255</p></td>
-                      <td><p></p></td>
                    </tr>
-                   <tr>
+                   <tr id="flashProduct_bootloaderIndex">
                       <td><p>-bi --bootloaderIndex</p></td>
                       <td><p>Bootloader slot index - a bootloader that allows you to run and update the main firmware - always required</p></td>
                       <td><p>0 ... 255</p></td>
-                      <td><p></p></td>
                    </tr>
-                   <tr>
+                   <tr id="flashProduct_seIndex">
                       <td><p>-sei --seIndex</p></td>
                       <td><p>Secure Engine slot index - the need depends on the type of chip being flashed</p></td>
                       <td><p>0 ... 255</p></td>
-                      <td><p></p></td>
                    </tr>
-                   <tr>
+                   <tr id="flashProduct_keyIndex">
                       <td><p>-ki --keyIndex</p></td>
                       <td><p>Key slot index - always needed except for the firmware of the programmer itself</p></td>
                       <td><p>0 ... 255</p></td>
-                      <td><p></p></td>
                    </tr>
-                   <tr>
+                   <tr id="flashProduct_chip">
                     <td><p>-c --chip</p></td>
                     <td>
                         <p>Type of chip being flashed, you can see all supported chips using <a href="#chipSupport">Chip support</a></p>
                     </td>
                     <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
-                   <tr>
-                      <td><p>-o --options</p></td>
-                      <td><p>Let the programmer to generate the Z-Wave DSK for the device (requires support in the firmware flashed)</p></td>
-                      <td><p></p>DSK</td>
-                      <td><p></p></td>
+                 <tr id="flashProduct_options">
+                    <td><p>-o --options</p></td>
+                      <td><p>Additional options for customizing firmware</p></td>
+                      <td>
+                        <table class="borderless">
+                            <tr>
+                                <td><b>DSK</b></td>
+                                <td>Let the programmer to generate the Z-Wave DSK for the device (requires support in the firmware flashed</td>
+                            </tr>
+                            <tr>
+                                <td><b>NO_LOCK</b></td>
+                                <td>Don't lock the chip after flashing. Works only if the firmare was loaded in the programmer unencrypted</td>
+                            </tr>
+                         </table>
+                       </td>
                    </tr>
-                   <tr>
-                      <td><p>-o --options</p></td>
-                      <td><p>Don't lock the chip after flashing. Works only if the firmare was loaded in the programmer unencrypted</p></td>
-                      <td><p>NO_LOCK</p></td>
-                      <td><p></p></td>
-                   </tr>
-                   <tr>
+                   <tr id="flashProduct_userData">
                       <td><p>-u --userData</p></td>
                       <td><p>Defines special user data as a hex-encoded string (requires support in the firmware flashed).</p></td>
-                      <td><p></p></td>
                       <td><p></p></td>
                    </tr>
                    <tr>
                     <td><p>-qr --qrCodeDir</p></td>
                     <td><p>Output SmartStart QR-code dir - only used in conjunction with <b>-o DSK</b></p></td>
                     <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-dp --deviceProfile</p></td>
                     <td><p>Specifies product profile for the QR-code generation - only used in conjunction with <b>-o DSK</b></p></td>
-                    <td><p></p></td>
                     <td><p></p></td>
                  </tr>
                 </tbody>
@@ -568,90 +796,73 @@
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
                       <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                  <tr>
                     <td><p>-sapi --sapi</p></td>
                     <td>
-                        <p>Sets the speed SAPI - affects the speed at which <b>zme_prog7</b> communicates with the programmer firmware</p>
-                        <p><b>zme_prog7</b> is capable of determining the speed itself, so it is not necessary to specify it explicitly using <b><a href="#Usage_baudrate">[-b --baudrate]</a></b></p>
+                        <p><a href="#Info_speed">SAPI</a></p>
                     </td>
                     <td><p>230400, 460800 and 921600</p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-swd --swd</p></td>
                     <td>
-                        <p>Sets the SWD speed - this is the speed of interaction via the SWD protocol with the connected chip via IDC-10</p>
-                        <p>These are all commands that interact with the connected chip, but first of all this is the command <a href="#flashFile">Flash file</a></p>
-                        <p>You can find out the current speed using <a href="#Info">Info</a> - <b>SWD speed</b></p>
+                        <p><a href="#Info_speed">SWD</a></p>
                         <p>❗At high speeds you need to pay attention to the quality of the cable</p>
                     </td>
                     <td><p>1024000 to 19000000</p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-uart --uart</p></td>
                     <td>
-                        <p>Sets the uart speed - this is the flashing speed when commanded <a href="#flashProduct">Flash product</a></p>
-                        <p>You can find out the current speed using <a href="#Info">Info</a> - <b>SWD UART speed</b></p>
+                        <p><a href="#Info_speed">SWD UART</a></p>
                         <p>❗At high speeds you need to pay attention to the quality of the cable</p>
                     </td>
                     <td><p>960000 to 2500000</p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-pti --pti</p></td>
                     <td>
-                        <p>Sets the speed PTI - this affects the speed at which the radio will output data about received radio packets</p>
-                        <p>You can find out the current speed using <a href="#Info">Info</a> - <b>PTI speed</b></p>
+                        <p><a href="#Info_speed">PTI</a></p>
                     </td>
                     <td><p>230400, 460800 and 921600</p></td>
-                    <td><p></p></td>
                  </tr>
                 </tbody>
              </table>
 
             <h3 id="lic">License</h3>
             <p>Load a <b>Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 lic &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
-            <p>You can see the current license status on your programmer using the command <a href="#Info">Info</a> - <b>LICENSE</b></p>
-            <p>Pay attention to <b>Flash counter</b> and <b>Max prog</b></p>
-            <p><b>Flash counter</b> how many times have you already flashed the firmware from <b>Z-Wave.Me</b></p>
-            <p><b>Flash counter max</b> how many times can you flash firmware from <b>Z-Wave.Me</b></p>
+            <p>You can see the current license status <a href="#Info_license">LICENSE</a></p>
 
             <h3 id="licCustom">License custom</h3>
             <p>Load a <b>custom not Z-Wave.Me</b> license package in the programmer:<br><code>zme_prog7 licCustom &lt;package&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>The package can be generated using the command <a href="#licCustomGen">License custom generate</a></p>
+            <p>You can see the current license status <a href="#Info_license_custom">LICENSE CUSTOM</a></p>
 
             <h3 id="licCustomGen">License custom generate</h3>
             <p>Load a <b>custom</b> license package in the programmer:<br><code>zme_prog7 licCustomGen &lt;uuid&gt; <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
-            <p>You can see the current license custom status on your programmer using the command <a href="#Info">Info</a> - <b>LICENSE CUSTOM</b></p>
-            <p><b>Flash counter</b> how many times have you already flashed the firmware from <b>not Z-Wave.Me</b></p>
-            <p><b>Flash counter max</b> how many times can you flash firmware from <b>not Z-Wave.Me</b></p>
+            <p>You can see the current license status <a href="#Info_license_custom">LICENSE CUSTOM</a></p>
+            <p>You can install the newly generated license using the command <a href="#licCustom">License custom</a> </p>
             <table class="wikitable">
                 <tbody>
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
                       <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>uuid</p></td>
-                    <td><p>UUID of your programmer, you can find it out using <a href="#Info">Info</a></p></td>
-                    <td><p></p></td>
-                    <td><p></p></td>
+                    <td><p><a href="#Info_board">UUID</a> of your programmer</p></td>
+                    <td><p>hex string</p></td>
                  </tr>
                    <tr>
                     <td><p>-cm --countMax</p></td>
                     <td><p>Max programming counter</p></td>
-                    <td><p>0 ... 255 4294967295</p></td>
-                    <td><p></p></td>
+                    <td><p>0 ... 4294967295</p></td>
                     <tr>
                         <td><p>-k --key</p></td>
                         <td><p>Your personal key, which will be received with the license, is tied to your programmer</p></td>
-                        <td><p></p></td>
-                        <td><p></p></td>
+                        <td><p>hex string</p></td>
                      </tr>
                  </tr>
                 </tbody>
@@ -679,8 +890,8 @@
                    <tr>
                     <td><p>filename</p></td>
                     <td>
-                        <p>Path to the file from which you want to make a <b>pkzme</b> file</p>
-                        <p>Supports <b>hex</b> or <b>bin</b> type files based on <b>Silabs</b</p>
+                        Path to the file from which you want to make a <b>pkzme</b> file<br>
+                        Supports <b>hex</b> or <b>bin</b> type files based on <b>Silabs</b
                     </td>
                     <td><p></p></td>
                     <td><p></p></td>
@@ -753,33 +964,25 @@
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                    </tr>
                    <tr>
                     <td><p>filename</p></td>
                     <td>
                         <p>Path to the <b>pkzme</b> file you want to unpack</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-o --output</p></td>
                     <td>
                         <p>Path with name to the output file. Otherwise, a folder will be created in the same directory where the file you want to unpack is located</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
                  <tr>
                     <td><p>-p --profile</p></td>
                     <td>
-                        <p>Path to the key file created using the command <a href="#fileGenKey">File generate key</a></p>
-                        <p>Required parameter for <b>pkzme</b> files created <a href="#fileSign">File sign</a> and with a flag <b>-obj AES</b></p>
+                        Path to the key file created using the command <a href="#fileGenKey">File generate key</a><br>
+                        Required parameter for <b>pkzme</b> files created <a href="#fileSign">File sign</a> and with a flag <b>-obj AES</b>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
              </table>
 
@@ -803,12 +1006,19 @@
                  </tr>
                  <tr>
                     <td><p>-t --type</p></td>
+                    <td>Generated key type</td>
                     <td>
-                        <p>Generated key type</p>
-                        <p><b>GBL</b> will create a key for the <b>Silabs</b> firmware, which is needed for subsequent updates of these firmware with encrypted images</p>
-                        <p><b>PKZME</b> creates a key that can be used to create your own <b>pkzme</b> files using the command <a href="#fileSign">File sign</a></p>
+                        <table class="borderless">
+                            <tr>
+                                <td><b>GBL</b></td>
+                                <td>will create a key for the <b>Silabs</b> firmware, which is needed for subsequent updates of these firmware with encrypted images</td>
+                            </tr>
+                            <tr>
+                                <td><b>PKZME</b></td>
+                                <td>creates a key that can be used to create your own <b>pkzme</b> files using the command <a href="#fileSign">File sign</a></td>
+                            </tr>
+                         </table>
                     </td>
-                    <td><p>GBL or PKZME </p></td>
                     <td><p>GBL</p></td>
                  </tr>
              </table>
@@ -821,70 +1031,45 @@
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
                       <th><p>Values</p></th>
-                      <th><p>Default</p></th>
-                   </tr>
+                    </tr>
                    <tr>
                     <td><p>-o --options</p></td>
                     <td>
-                        <p>format <b>'dd:text'</b> only one copy</p>
-                        <p>❗Allows you to perform a hard reset of the connected chip, necessary for carriage work with chips via <b>swd</b></p>
-                    </td>
-                    <td><p>RESET</p></td>
-                    <td><p></p></td>
-                 </tr>
-                 <tr>
-                    <td><p>-o --options</p></td>
-                    <td>
-                        <p>format <b>'dd:text'</b> only one copy</p>
-                        <p>❗Required for <b>swd</b> to work</p>
-                    </td>
-                    <td><p>SWDIO</p></td>
-                    <td><p></p></td>
-                 </tr>
-                 <tr>
-                    <td><p>-o --options</p></td>
-                    <td>
-                        <p>format <b>'dd:text'</b> only one copy</p>
-                        <p>❗Required for <b>swd</b> to work</p>
-                    </td>
-                    <td><p>SWCLK</p></td>
-                    <td><p></p></td>
-                 </tr>
-                 <tr>
-                    <td><p>-o --options</p></td>
-                    <td>
-                        <p>format <b>'dd:text'</b> only one copy</p>
-                        <p>On development stage</p>
-                    </td>
-                    <td><p>SWO</p></td>
-                    <td><p></p></td>
-                 </tr>
-                 <tr>
-                    <td><p>-o --options</p></td>
-                    <td>
-                        <p>format <b>'dd:text'</b> only one copy</p>
-                        <p>On development stage</p>
-                    </td>
-                    <td><p>GPC</p></td>
-                    <td><p></p></td>
-                 </tr>
-                 <tr>
-                    <td><p>-o --options</p></td>
-                    <td>
-                        <p>format <b>'dd:text'</b> only one copy</p>
-                        <p>Allows you to use a button on your programmer</p>
-                    </td>
-                    <td><p>BTN</p></td>
-                    <td><p></p></td>
-                 </tr>
-                 <tr>
-                    <td><p>-o --options</p></td>
-                    <td>
                         <p>format <b>'dd:text'</b></p>
-                        <p>disables</p>
+                        <p>A more detailed description of the values ​​and the current values ​​set can be found using <a href="#Info_pinout">PINOUT</a> </p>
                     </td>
-                    <td><p>N/C</p></td>
-                    <td><p></p></td>
+                    <td>
+                        <table class="borderless">
+                            <tr>
+                                <td><b>RESET</b></td>
+                                <td>only one copy</td>
+                            </tr>
+                            <tr>
+                                <td><b>SWDIO</b></td>
+                                <td>only one copy</td>
+                            </tr>
+                            <tr>
+                                <td><b>SWCLK</b></td>
+                                <td>only one copy</td>
+                            </tr>
+                            <tr>
+                                <td><b>SWO</b></td>
+                                <td>only one copy</td>
+                            </tr>
+                            <tr>
+                                <td><b>GPC</b></td>
+                                <td>only one copy</td>
+                            </tr>
+                            <tr>
+                                <td><b>BTN</b></td>
+                                <td>only one copy</td>
+                            </tr>
+                            <tr>
+                                <td><b>N/C</b></td>
+                                <td>many appointments</td>
+                            </tr>
+                         </table>
+                    </td>
                  </tr>
                  <tr>
                     <td><p>-r --reset</p></td>
@@ -892,7 +1077,6 @@
                         <p>Allows you to reset the <b>IDC-10</b> programmer to factory settings</p>
                     </td>
                     <td><p>true</p></td>
-                    <td><p></p></td>
                  </tr>
              </table>
 
@@ -909,42 +1093,49 @@
              <p>You can see what action has already been assigned using <a href="#buttonInfo">Button info</a></p>
              <table class="wikitable">
                 <tbody>
-                   <tr>
+                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
                       <th><p>Values</p></th>
-                      <th><p>Default</p></th>
+                    </tr>
                  <tr>
                     <td><p>-a --action</p></td>
                     <td>
                         <p>An action that can be assigned to a programmer button</p>
-                        <p><b>nothing</b> nothing will happen when you press the button</p>
-                        <p><b>chipReboot</b> similar to the command <a href="#chipReboot">Chip reboot</a></p>
-                        <p><b>flashProduct:index|name</b> allows you to bind a <b>preset</b> by pressing a button</p>
                     </td>
-                    <td><p>nothing, chipReboot, flashProduct:index|name </p></td>
-                    <td><p></p></td>
+                    <td>
+                        <table class="borderless">
+                            <tr>
+                                <td><b>nothing</b></td>
+                                <td>nothing will happen when you press the button</td>
+                            </tr>
+                            <tr>
+                                <td><b>chipReboot</b></td>
+                                <td>similar to the command <a href="#chipReboot">Chip reboot</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>flashProduct:index|name</b></td>
+                                <td>allows you to bind a <b>preset</b> by pressing a button <br> You can create a <b>preset</b> using the command <a href="#presetSet">Preset set</a></td>
+                            </tr>
+                         </table>
+                    </td>
                  </tr>
              </table>
              
              <h3 id="RTCSet">RTC set</h3>
              <p>Set time in the programmer to system time:<br><code>zme_prog7 RTCSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-ts --timestamp]</code></p>
              <p>This command should be used on each power on if the programmer have no battery inserted. To preserve the time without power, the battery should be inserted.</p>
-             <p>You can see what time is currently set using <a href="#Info">Info</a> - <b>RTC</b></p>
+             <p>You can see what time is currently set using <a href="#Info_rtc">RTC</a></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                  <tr>
                     <td><p>-ts --timestamp</p></td>
                     <td>
                         <p>If the option of automatically setting the current time does not suit you, then you can pass the time stamp UTC yourself as a number</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
              </table>
 
@@ -956,15 +1147,11 @@
                    <tr>
                       <th><p>Option</p></th>
                       <th><p>Description</p></th>
-                      <th><p>Values</p></th>
-                      <th><p>Default</p></th>
                  <tr>
                     <td><p>-o --output</p></td>
                     <td>
                         <p>Path to the file where all output will be saved as a <b>json</b> file</p>
                     </td>
-                    <td><p></p></td>
-                    <td><p></p></td>
                  </tr>
              </table>
              <figure>
@@ -985,7 +1172,10 @@
              </figure>
 
              <h3 id="presetSet">Preset set</h3>
-             <p>Generates a preset based on the firmware previously loaded into the programmers via the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 presetSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-fi --firmwareIndex] [-bi --bootloaderIndex] [-ki --keyIndex] [-sei --seIndex] [-c --chip] [-u --userData] [-o --options] [-i --index] [-n --name]</code></p>
+             <p>Generates a preset based on the firmware previously loaded into the programmers via the command <a href="#slotStore">Slot store</a>:<br><code>zme_prog7 presetSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a>
+                <a href="#flashProduct_firmwareIndex">[-fi --firmwareIndex]</a> <a href="#flashProduct_bootloaderIndex">[-bi --bootloaderIndex]</a>
+                <a href="#flashProduct_keyIndex">[-ki --keyIndex]</a> <a href="#flashProduct_seIndex">[-sei --seIndex]</a> <a href="#flashProduct_chip">[-c --chip]</a>
+                <a href="#flashProduct_userData">[-u --userData]</a> <a href="#flashProduct_options">[-o --options]</a> [-i --index] [-n --name]</code></p>
              <p>If you don’t explicitly specify all or some of the parameters, it will try to select it yourself</p>
              <p>A total of 10 presets can be saved and used</p>
              <p>You can assign presets to a button using <a href="#buttonSet">Button set</a></p>
@@ -995,74 +1185,21 @@
                        <th><p>Option</p></th>
                        <th><p>Description</p></th>
                        <th><p>Values</p></th>
-                       <th><p>Default</p></th>
                     </tr>
-                    <tr>
-                       <td><p>-fi --firmwareIndex</p></td>
-                       <td><p>Firmware slot index - the main firmware file is always required</p></td>
-                       <td><p>0 ... 255</p></td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr>
-                       <td><p>-bi --bootloaderIndex</p></td>
-                       <td><p>Bootloader slot index - a bootloader that allows you to run and update the main firmware - always required</p></td>
-                       <td><p>0 ... 255</p></td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr>
-                       <td><p>-sei --seIndex</p></td>
-                       <td><p>Secure Engine slot index - the need depends on the type of chip being flashed</p></td>
-                       <td><p>0 ... 255</p></td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr>
-                       <td><p>-ki --keyIndex</p></td>
-                       <td><p>Key slot index - always needed except for the firmware of the programmer itself</p></td>
-                       <td><p>0 ... 255</p></td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr>
-                     <td><p>-c --chip</p></td>
-                     <td>
-                         <p>Type of chip being flashed, you can see all supported chips using <a href="#chipSupport">Chip support</a></p>
-                     </td>
-                     <td><p></p></td>
-                     <td><p></p></td>
-                  </tr>
-                    <tr>
-                       <td><p>-o --options</p></td>
-                       <td><p>Let the programmer to generate the Z-Wave DSK for the device (requires support in the firmware flashed)</p></td>
-                       <td><p></p>DSK</td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr>
-                       <td><p>-o --options</p></td>
-                       <td><p>Don't lock the chip after flashing. Works only if the firmare was loaded in the programmer unencrypted</p></td>
-                       <td><p>NO_LOCK</p></td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr>
-                       <td><p>-u --userData</p></td>
-                       <td><p>Defines special user data as a hex-encoded string (requires support in the firmware flashed).</p></td>
-                       <td><p></p></td>
-                       <td><p></p></td>
-                    </tr>
-                    <tr id="presetReset_index">
+                    <tr id="presetSet_index">
                         <td><p>-i --index</p></td>
                         <td>
                             <p>The index at which you want to save the preset</p>
                             <p>If the index is not specified, it will be saved to the first free one; if there is none, it will return an error</p>
                         </td>
                         <td><p>0 ... 9</p></td>
-                        <td><p></p></td>
                      </tr>
-                     <tr id="presetReset_name">
+                     <tr id="presetSet_name">
                         <td><p>-n --name</p></td>
                         <td>
                             <p>If you do not specify a name, the default one will be used, it will be created in this form <b>preset xx</b></p>
                             <p>The name length cannot be more than 32 bytes</p>
                         </td>
-                        <td><p></p></td>
                         <td><p></p></td>
                      </tr>
                  </tbody>
@@ -1074,12 +1211,12 @@
 
              <h3 id="presetReset">Preset reset</h3>
              <p>Resets presets installed via <a href="#presetSet">Preset set</a>:<br><code>zme_prog7 presetReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> <a href="#presetReset_index">[-i --index]</a> <a href="#presetReset_name">[-n --name]</a></code></p>
-             <p>if not <a href="#presetReset_index">[-i --index]</a> or <a href="#presetReset_name">[-n --name]</a> is specified, then it will delete all presets</p>
+             <p>if not <a href="#presetSet_index">[-i --index]</a> or <a href="#presetSet_name">[-n --name]</a> is specified, then it will delete all presets</p>
 
              <h3 id="radioTest">Radio test</h3>
              <p>Allows you to run the radio in different modes:<br><code>zme_prog7 radioTest -m --mode  -fr --freq -c --channel -p -power -t --timeout <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
              <p>The command works asynchronously, that is, while the radio is operating, the programmer can be used for its intended purpose</p>
-             <p>You can see what state the radio is in now using <a href="#Info">Info</a> -> <b>RADIO</b></p>
+             <p>You can see what state the radio is in now using <a href="#Info_radio">RADIO</a></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -1096,13 +1233,13 @@
                             <tr><td><b>CARRIER</b></td><td>Emit carrier only</td></tr>
                             <tr><td><b>PN9</b></td><td>Send a polynomium x^9 + x^5 + 1</td></tr>
                             <tr><td><b>B10</b></td><td>Send 10101010.... sequence</td></tr>
-                            <tr><td><b>PKG</b></td><td>Sends meaningful data from the UUID of the programmer which can be obtained using the command <a href="#Info">Info</a> -> <b>BOARD</b> -> <b>UUID</b>. </td></tr>
+                            <tr><td><b>PKG</b></td><td>Sends meaningful data from the UUID of the programmer which can be obtained using the command <a href="#Info_board">UUID</a></td></tr>
                             <tr><td><b>MODEM</b></td><td>Allows you to receive meaningful data through <a href="#COMPorts_pti_programmer">PTI</a> and send it yourself using the command <a href="#radioManual">Radio manual</a></td></tr>
                          </table>
                       </td>
-                      <td><p><b>PKG</b></p></td>
+                      <td><p>PKG</p></td>
                    </tr>
-                   <tr>
+                   <tr id="radioTest_freq">
                       <td><p>-fr --freq</p></td>
                       <td><p>Modulation type</p></td>
                       <td>
@@ -1118,9 +1255,9 @@
                             <tr><td><b>BLE_2MBPS</b></td><td>BLE 2 Mbps channel (DQPSK)</td></tr>
                          </table>
                       </td>
-                      <td><p><b>2P4GHZ</b></p></td>
+                      <td><p>2P4GHZ</p></td>
                    </tr>
-                   <tr>
+                   <tr id="radioTest_channel">
                       <td><p>-c --channel</p></td>
                       <td><p>Channel number</p></td>
                       <td>
@@ -1129,7 +1266,7 @@
                         </td>
                       <td><p>11</p></td>
                    </tr>
-                   <tr>
+                   <tr id="radioTest_power">
                       <td><p>-p -power</p></td>
                       <td><p>TX power. Units of measurement (raw) do not linearly affect signal strength.</p></td>
                       <td><p>from 1 to 180 (raw)</p></td>
