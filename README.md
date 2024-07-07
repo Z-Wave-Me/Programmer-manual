@@ -7,5 +7,6 @@ Z-Wave.Me Programmer is able to flash Z-Wave and Zigbee chips by Silicon Labs su
 - ZGM130S
 - ZGM230S
 - EFR32ZG23
-- EFR32MG21
 - MGM210
+- EFR32MG21
+- EFR32MG24
