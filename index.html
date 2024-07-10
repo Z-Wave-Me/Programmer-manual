@@ -99,7 +99,7 @@
       <div class="wrapper wrapper-helper">
          <div class="content">
             <h1 id="ProductDescription">Product description</h1>
-            <p>Z-Wave.Me Programmer is a full featured programming tool for development, testing, production and production testing of IoT devices based on Z-Wave, Zigbee, Thread and BLE protocols.</b>
+            <p>Z-Wave.Me Programmer is a full-featured programming tool for development, testing, production and production testing of IoT devices based on Z-Wave, Zigbee, Thread and BLE protocols.</b>
             <center><img src="pics/Programmer-side.png" width="30%"></center>
             <p>The Z-Wave.Me programmer can flash the following families of chips from Silicon Labs. For more detailed and accurate information, use <a href="#chipSupport">Chip support</a>:</p>
             <ul>
@@ -111,10 +111,10 @@
                <li>EFR32MG24</li>
             </ul>
             
-            <p>The programmeer can be used to manipulate the chip (<a href="#chipLock">lock</a>, <a href="#chipUnlock">unlock</a>, <a href="#chipReboot">reboot</a>), <a href="#flashFile">flash a file</a> or flash from the internal programmer storage (called <a href="#slotInfo">slot</a>).</p>
+            <p>The programmer can be used to manipulate the chip (<a href="#chipLock">lock</a>, <a href="#chipUnlock">unlock</a>, <a href="#chipReboot">reboot</a>), <a href="#flashFile">flash a file</a> or flash from the internal programmer storage (called <a href="#slotInfo">slot</a>).</p>
             
             <h1 id="Package">Package</h1>
-            <p>The Z-Wave.Me Programmer package inclides:</p>
+            <p>The Z-Wave.Me Programmer package includes:</p>
             <ul>
                <li>Z-Wave.Me Programmer</li>
                <li>2.4 GHz RP-SMA male antenna</li>
@@ -129,8 +129,8 @@
             <p>The front panel of the programmer has one programming port with IDC-10 male 10-pins (2x5) connector with pitch 2.54 mm.</p>
             <center><img src="pics/Programmer-front-annotations.png" width="30%"></center>
             <p>On the top panel there is a status LED and a programming button. You can configure how the button works using the command <a href="#buttonSet">Button set</a></p>
-            <p>The back panel has a USB-C port. This port is used to power the programmer and to flash and upload firmwares in the programmer when connected to a PC.</p>
-            <p>In addition the programmer has two RP-SMA female connectors for 868/916 MHz (for Z-Wave) and 2.4 GHz antennas (for Zigbee, Thread and BLE). Those antennas are used for production test and as an RF sniffer.</p>
+            <p>The back panel has a USB-C port. This port is used to power the programmer and to flash and upload firmware in the programmer when connected to a PC.</p>
+            <p>In addition, the programmer has two RP-SMA female connectors for 868/916 MHz (for Z-Wave) and 2.4 GHz antennas (for Zigbee, Thread and BLE). Those antennas are used for production test and as an RF sniffer.</p>
             <center><img src="pics/Programmer-back-annotations.png" width="30%"></center>
             <h1 id="Pinout">Programming port pinout</h1>
             <p>The programming cable connector has an IDC-10 female connector on one side. The other side of it should be adjusted to your device depending on the programming pads on the PCB. The programmer port is also compatible with the Tag Connect TC2050-IDC cable.</p>
@@ -248,7 +248,7 @@
                 <figcaption> <i>Typical output for info command</i></figcaption>
             </figure>
             
-            The output is splitted in groups:
+            The output is split in groups:
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -263,7 +263,7 @@
                          <table class="borderless">
                             <tr>
                                 <td><b>UUID</b></td>
-                                <td>Unique number of your programmer. You will need it fir: <a href="#keyGen">Key generate</a> and <a href="#licCustomGen">License custom generate</a></td>
+                                <td>Unique number of your programmer. You will need it for: <a href="#keyGen">Key generate</a> and <a href="#licCustomGen">License custom generate</a></td>
                             </tr>
                          </table>
                       </td>
@@ -308,7 +308,7 @@
                  </tr>
                  <tr id="Info_radio">
                     <td><p>RADIO</p></td>
-                    <td><p>Shows current radio status</p></td>
+                    <td><p>Shows of current radio status</p></td>
                     <td>
                        <table class="borderless">
                           <tr>
@@ -388,7 +388,7 @@
                  </tr>
                  <tr id="Info_license_custom">
                     <td><p>LICENSE CUSTOM</p></td>
-                    <td><p>Information about the permission to flash your firmwares granted to the user (factory). You can install your license using the command <a href="#licCustom">License custom</a>, having previously generated using <a href="#licCustomGen">License custom generate</a></p></td>
+                    <td><p>Information about the permission to flash your firmware granted to the user (factory). You can install your license using the command <a href="#licCustom">License custom</a>, having previously generated using <a href="#licCustomGen">License custom generate</a></p></td>
                     <td>
                        <table class="borderless">
                           <tr>
@@ -437,7 +437,7 @@
 
             <h3 id="chipLock">Chip lock</h3>
             <p>Lock the connected chip to prevent read-back of the firmware:<br><code>zme_prog7 chipLock <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
-            <p>After locking the chip, the programmer will not be able to work with the chip anymore. To unlock the chip back, use: <a href="#chipUnlock">Chip unlock</a>. Unlocking will erase the exising firmware from the chip.</p>
+            <p>After locking the chip, the programmer will not be able to work with the chip anymore. To unlock the chip back, use: <a href="#chipUnlock">Chip unlock</a>. Unlocking will erase the existing firmware from the chip.</p>
             <p>After locking the chip, if you use <a href="#chipInfo">Chip info</a>, you will see:</p>
             <figure>
                 <img src="pics/example_chip_info_lock.png">
@@ -454,7 +454,7 @@
             <p>Performs a hard reboot of the connected chip. For this action, the <b>RESET</b> pin is used. For more details check the <a href="#Pinout">Programming port pinout</a></p>
 
             <h3 id="slotInfo">Slot info</h3>
-            <p>Prints avaliable and occupied slots of the programmer:<br><code>zme_prog7 slotInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
+            <p>Prints available and occupied slots of the programmer:<br><code>zme_prog7 slotInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
             <p>You can load into slots using <a href="#slotStore">Slot store</a>, reset their contents <a href="#slotReset">Slot reset</a></p>
             <figure>
                 <img src="pics/example_slot_info.png">
@@ -474,7 +474,7 @@
                     <td><p>filename</p></td>
                     <td><p>Path to the <b>pkzme</b> file you want to load into the slot</a></p></td>
                     <td><p><b>pkzme</b> the file can be obtained from <b>Z-Wave.Me</b> or you can create it yourself using <a href="#fileSign">File sign</a></p></td>
-                    <td><p>A zip file with multiple pkzme files can be used - in this case all files will be loaded to available slots.</p></td>
+                    <td><p>A zip file with multiple pkzme files can be used - in this case all, files will be loaded to available slots.</p></td>
                  </tr>
                  <tr>
                     <td><p>-i --index</p></td>
@@ -489,7 +489,7 @@
              </table>
 
             <h3 id="slotReset">Slot reset</h3>
-            <p>Clears slots previously written using the command <a href="#slotStore">Slot store</a>, You can see which slots are used using <a href="#slotInfo">Slot info</a>:<br><code>zme_prog7 slotReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
+            <p>Clears slots previously written using the command <a href="#slotStore">Slot store</a>, You can see which slots are used <a href="#slotInfo">Slot info</a>:<br><code>zme_prog7 slotReset <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-i --index]</code></p>
             <p>❗Be careful all data is permanently deleted</p>
             <table class="wikitable">
                 <tbody>
@@ -501,7 +501,7 @@
                  <tr>
                     <td><p>-i --index</p></td>
                     <td>
-                        <p>If you not specified, then all slots will be deleted, otherwise only the specified slot</p>
+                        <p>If are not specified  have not specified, then all slots will be deleted, otherwise only the specified slot</p>
                     </td>
                     <td><p>from 0 to 255</p></td>
                  </tr>
@@ -557,7 +557,7 @@
                  <tr>
                     <td><p>-i --index</p></td>
                     <td>
-                        <p>If you not specified, all keys will be deleted</p>
+                        <p>If are not specified  have not specified, all keys will be deleted</p>
                         <p>❗When deleting a key/keys, all <b>pkzme</b> files associated with this key/keys will be deleted</p>
                     </td>
                     <td><p>from 0 to 15</p></td>
