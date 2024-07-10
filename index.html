@@ -636,7 +636,7 @@
 
             <h3 id="flashData">Flash Data</h3>
             <p>Allows you to write data to the flash of the connected chip:<br><code>zme_prog7 flashData -a --address -da --data <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a></code></p>
-            <p>If you already have data on the flash memory, you might need to erase it first. It is only possible to override data data from 1 to 0, but not from 0 to 1. In the latter case you will need to erase first using <a href="#erasePage">Erase Page</a> or <a href="#eraseMass">Erase Mass</a></p>
+            <p>If you already have data on the flash memory, you might need to erase it first. It is only possible to override data from 1 to 0, but not from 0 to 1. In the latter case, you will need to erase first using <a href="#erasePage">Erase Page</a> or <a href="#eraseMass">Erase Mass</a></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -766,7 +766,7 @@
                             </tr>
                             <tr>
                                 <td><b>NO_LOCK</b></td>
-                                <td>Don't lock the chip after flashing. Works only if the firmare was loaded in the programmer unencrypted</td>
+                                <td>Don't lock the chip after flashing. Works only if the firmware was loaded in the programmer unencrypted</td>
                             </tr>
                          </table>
                        </td>
@@ -813,7 +813,7 @@
                     <td><p>-swd --swd</p></td>
                     <td>
                         <p><a href="#Info_speed">SWD</a></p>
-                        <p>❗At high speeds you need to pay attention to the length and the quality of the cable</p>
+                        <p>❗At high speeds, you need to pay attention to the length and the quality of the cable</p>
                     </td>
                     <td><p>1024000 to 19000000</p></td>
                  </tr>
@@ -821,7 +821,7 @@
                     <td><p>-uart --uart</p></td>
                     <td>
                         <p><a href="#Info_speed">SWD UART</a></p>
-                        <p>❗At high speeds you need to pay attention to the length and the quality of the cable</p>
+                        <p>❗At high speeds, you need to pay attention to the length and the quality of the cable</p>
                     </td>
                     <td><p>960000 to 2500000</p></td>
                  </tr>
@@ -964,7 +964,7 @@
              </table>
 
              <h3 id="fileExtract">File extract</h3>
-             <p>Allows you to unpack previously created <b>pkzme</b> files <a href="#fileSign">File sign</a>:<br><code>zme_prog7 fileExtract &lt;filename&gt; <a href="#Usage_device">-d --device</a> [-o --output] [-p --profile]</code></p>
+             <p>Allows you to unpack previously created <b>pkzme</b> files, <a href="#fileSign">File sign</a>:<br><code>zme_prog7 fileExtract &lt;filename&gt; <a href="#Usage_device">-d --device</a> [-o --output] [-p --profile]</code></p>
              <table class="wikitable">
                 <tbody>
                    <tr>
@@ -1017,7 +1017,7 @@
                         <table class="borderless">
                             <tr>
                                 <td><b>GBL</b></td>
-                                <td>will create a key for the <b>SiLabs</b> firmware, which is needed for subsequent updates of these firmware with encrypted images</td>
+                                <td>will create a key for the <b>SiLabs</b> firmware, which is needed for subsequent updates of this firmware with encrypted images</td>
                             </tr>
                             <tr>
                                 <td><b>PKZME</b></td>
@@ -1148,7 +1148,7 @@
 
              <h3 id="logInfo">Log info</h3>
              <p>Displays log of the programmer:<br><code>zme_prog7 logInfo <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-o --output]</code></p>
-             <p>Information is recorded during use <a href="#flashProduct">Flash product</a> and also when pressing the programmer button, if a similar action is assigned there <a href="#buttonSet">Button Set</a></p>
+             <p>Information is recorded during use <a href="#flashProduct">Flash product</a> and also when pressing the programmer button, if a similar action is assigned their <a href="#buttonSet">Button Set</a></p>
             <table class="wikitable">
                 <tbody>
                    <tr>
@@ -1239,7 +1239,7 @@
                       <td>
                          <table class="borderless">
                             <tr><td><b>CARRIER</b></td><td>Emit carrier only</td></tr>
-                            <tr><td><b>PN9</b></td><td>Send a polynomium x^9 + x^5 + 1</td></tr>
+                            <tr><td><b>PN9</b></td><td>Send a polynomial x^9 + x^5 + 1</td></tr>
                             <tr><td><b>B10</b></td><td>Send 10101010.... sequence</td></tr>
                             <tr><td><b>PKG</b></td><td>Sends meaningful data from the UUID of the programmer which can be obtained using the command <a href="#Info_board">UUID</a></td></tr>
                             <tr><td><b>MODEM</b></td><td>Allows you to receive meaningful data through <a href="#COMPorts_pti_programmer">PTI</a> and send it yourself using the command <a href="#radioSendPacked">Radio manual</a></td></tr>
@@ -1326,16 +1326,16 @@ zme_prog7 <a href="#flashFile">flashFile</a> bootloader.hex  -d /dev/ttyUSB2
 zme_prog7 <a href="#flashFile">flashFile</a> firmware.hex  -d /dev/ttyUSB2
                 </pre>
             </code>
-            <p>Secure Engine bootloader is typically taked from <a href="https://github.com/SiliconLabs/gecko_sdk/tree/gsdk_4.3/util/se_release/public">SiLabs git</a>. If the connected device is based on a chip that does not have a Secure Engine, skip the step with loading Secure Engine firmware.</p>
+            <p>Secure Engine bootloader is typically take from <a href="https://github.com/SiliconLabs/gecko_sdk/tree/gsdk_4.3/util/se_release/public">SiLabs git</a>. If the connected device is based on a chip that does not have a Secure Engine, skip the step with loading Secure Engine firmware.</p>
             <p>The bootloader and the firmware are compiled using the SiLabs Simplicity Studio.</p>
 
             <h3 id="example_lic">Example: Load a licence from <b>Z-Wave.Me</b></h3>
             <p>The license sets the number of allowed flash operations (flash counter). This ensures the factory can't produce more devices you ordered. Always have a 5-10% extra count for rework at the factory side.</p>
-            <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety keeping things simple for the factory.</p>
+            <p>Data in slots is encrypted and can not be extracted from the programmer. This ensures your intellectual property safety, keeping things simple for the factory.</p>
             <code>zme_prog7 <a href="#lic">lic</a> EB6BEEAC1A07D48BA24FF0AC6...C7 -d /dev/ttyUSB2</code>
 
             <h3 id="example_flash_product">Example: Mass flash a product</h3>
-            <p>For mass flashing of a product load files in slots (from a .zip file or individually one by one). Then use a button or a command to flash the product.</p>
+            <p>For mass flashing of a product, load files in slots (from a .zip file or individually one by one). Then use a button or a command to flash the product.</p>
             
             <p>Preparing the production from zip:</p>
             <code>
@@ -1500,7 +1500,7 @@ zme_prog7 <a href="#flashProduct">flashProduct</a> -u "014704010301ff00000001010
             </table>
 
             <h3 id="Channels_blue">Bluetooth Low Energy</h3>
-            <p>Bluetooth Low Energy channels are numbered from 0 to 39. Channels 37, 38, and 39 are Advertizing channels.</p>
+            <p>Bluetooth Low Energy channels are numbered from 0 to 39. Channels 37, 38, and 39 are Advertising channels.</p>
             <p>Modulation depends on the bandwidth:
                <ul>
                   <li>GFSK on 125 kbps and 500 kbps</li>
