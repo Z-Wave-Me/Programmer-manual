@@ -59,7 +59,7 @@
                      <li><a href="#pinoutSet">Pinout Set</a></li>
                      <li><a href="#buttonInfo">Button Info</a></li>
                      <li><a href="#buttonSet">Button Set</a></li>
-                     <li><a href="#RTCSet">RTC Set</a></li>
+                     <li><a href="#rtcSet">RTC Set</a></li>
                      <li><a href="#logInfo">Log Info</a></li>
                      <li><a href="#logReset">Log Reset</a></li>
                      <li><a href="#presetInfo">Preset Info</a></li>
@@ -332,7 +332,7 @@
                  </tr>
                  <tr id="Info_rtc">
                     <td><p>RTC</p></td>
-                    <td><p>Shows information about the time configured using the <a href="#RTCSet">RTC set</a> command</p></td>
+                    <td><p>Shows information about the time configured using the <a href="#rtcSet">RTC set</a> command</p></td>
                     <td>
                        <table class="borderless">
                           <tr>
@@ -1076,14 +1076,6 @@
                                 <td>can be assigned only to one pin</td>
                             </tr>
                             <tr>
-                                <td><b>SWO</b></td>
-                                <td>can be assigned only to one pin</td>
-                            </tr>
-                            <tr>
-                                <td><b>GPC</b></td>
-                                <td>can be assigned only to one pin</td>
-                            </tr>
-                            <tr>
                                 <td><b>BTN</b></td>
                                 <td>can be assigned only to one pin</td>
                             </tr>
@@ -1145,7 +1137,7 @@
                  </tr>
              </table>
              
-             <h3 id="RTCSet">RTC set</h3>
+             <h3 id="rtcSet">RTC set</h3>
              <p>Set time in the programmer to system time:<br><code>zme_prog7 RTCSet <a href="#Usage_device">-d --device</a> <a href="#Usage_baudrate">[-b --baudrate]</a> [-ts --timestamp]</code></p>
              <p>This command should be used on each power on if the programmer have no battery inserted. To preserve the time over power cycle, the battery should be inserted.</p>
              <p>You can see what time is currently set using <a href="#Info_rtc">RTC</a></p>
